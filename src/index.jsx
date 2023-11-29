@@ -1,3 +1,5 @@
+
+/*
 import "/src/teacherFetch.js"; // protection against fetch() in infinite re-render
 
 // (1) ------------ application state (model) -----------
@@ -29,6 +31,10 @@ createRoot(document.getElementById('root'))
 // ------ for debug purposes ----------
 window.myModel= model;             // make the model available in the Console
 window.myModel= reactiveModel;  
+*/
 
+import {createRoot} from "react-dom/client";
+createRoot(document.getElementById('root'))
+    .render(<div>hello world!</div>); 
 
 
