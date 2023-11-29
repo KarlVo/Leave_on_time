@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 
-import testView from "../views/testView";
+import TestView from "../views/testView";
 
 export default
 observer(

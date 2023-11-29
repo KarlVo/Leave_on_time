@@ -1,6 +1,13 @@
 import { BASE_URL, API_KEY } from "./apiConfig"
 
 
+//ny kod
+export function getTimeDetails(){
+    return fetch(BASE_URL, {method: 'GET'}).then(responseACB)
+
+}
+
+
 function arrayObjACB(ar){
     console.log("arr is: ", ar);
     return ar[0];

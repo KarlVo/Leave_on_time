@@ -1,26 +1,17 @@
+import model from '/src/CommuteModel.js'; 
 
-/*
-import "/src/teacherFetch.js"; // protection against fetch() in infinite re-render
+console.log("hejhej");
 
-// (1) ------------ application state (model) -----------
-import model from '/src/DinnerModel.js';
+import { observable, configure } from 'mobx';
+configure({enforceActions:"never",});
 
-// uncomment to make the app update when the model changes:
-
-import { observable, configure } from "mobx";
-configure({ enforceActions: "never", });  // we don't use Mobx actions
-const reactiveModel= observable(model);
-
-// then use reactiveModel instead of model below!
-
-// (2) ----------  display (mount) the root component in the browser page. Pass model(1) as prop. ---------
-// http://localhost:8080/react.html
+const reactiveModel = observable(model);
 
 import {createElement} from "react";
 window.React= {createElement:createElement}; // needed in the lab because it works with both React and Vue
 
 import {createRoot} from "react-dom/client";
-import ReactRoot from "./ReactRoot.jsx";
+import ReactRoot from "./reactjs/ReactRoot.jsx";    //här hämtar jag ReactRoot funktionen i ReactRoot filen
 
 createRoot(document.getElementById('root'))
     .render(<ReactRoot model={reactiveModel}/>);  // mounts the app in the page DIV with the id "root"
@@ -31,10 +22,5 @@ createRoot(document.getElementById('root'))
 // ------ for debug purposes ----------
 window.myModel= model;             // make the model available in the Console
 window.myModel= reactiveModel;  
-*/
-
-import {createRoot} from "react-dom/client";
-createRoot(document.getElementById('root'))
-    .render(<div>hello world!</div>); 
 
 

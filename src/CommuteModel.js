@@ -1,6 +1,8 @@
 //array with objects
 //struct /object
 
+import { getTimeDetails } from "./timetableSource";
+
 //attributes:
 //  name
 //  id
@@ -20,5 +22,21 @@
 
 export default {
 
-    commuteStations
+    commuteStations: [],
+    commuteDistances: [],
+    intrestedLines: [],
+    currentID: null,
+    myStations: [],
+
+
+    addStation(){
+        console.log("hej");
+    },
+
+    getStationDetails(){
+        const prom = getTimeDetails();
+    }
+
+
+
 }
