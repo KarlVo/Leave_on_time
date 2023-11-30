@@ -4,7 +4,7 @@ import {BASE_URL, STATION_API_KEY, STATION_URL} from "./apiConfig"
 //ny kod
 export function getTimeDetails(){
     console.log("vad är url", BASE_URL);
-    return fetch(BASE_URL, {method: 'GET'}).then(responseACB)
+    return fetch(BASE_URL, {method: 'GET' }).then(responseACB)
 
 }
 
