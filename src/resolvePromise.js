@@ -21,6 +21,13 @@ function resolvePromise(prms, promiseState){
 
     function successACB(result){
         if (promiseState.promise === prms){
+            
+
+
+
+            
+            console.log("kommer jag in i promise state", result);
+            
         promiseState.data = result;
         }
     }

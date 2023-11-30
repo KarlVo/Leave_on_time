@@ -1,7 +1,7 @@
 //array with objects
 //struct /object
 
-import { getDishDetails, getTimeDetails } from "./timetableSource";
+import { getTimeDetails } from "./timetableSource";
 import { getStationID } from "./timetableSource";
 import resolvePromise from "./resolvePromise.js";
 
@@ -36,14 +36,15 @@ export default {
     setCurrentStation(stationName){
         stationName = 'Slussen';
         console.log("add Station");
-        const prom = getStationDetails(stationName, true, 1);
+        const prom = getStationID(stationName, true, 1);
         resolvePromise(prom, this.stationIDPromiseState);
     },
 
     getStationDetails(){
         console.log("nu kom vi hit");
-    getStationDetails(stationID){
         const prom = getTimeDetails();
+        resolvePromise(prom, this.stationDetailsPromiseState)
+        console.log("svar", this.stationDetailsPromiseState.data);
     },
 
     addStation(stationToAdd){

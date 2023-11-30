@@ -10,10 +10,13 @@ observer(
             props.model.getStationDetails();
         }
 
+        function searchStationID_CB(x){
+            props.model.setCurrentStation();
+        }
 
         return (
                 <TestView 
-                    stationTable={firstCB}
+                    stationTable={firstCB} textEntry={searchStationID_CB}
                 
                 /> 
         
