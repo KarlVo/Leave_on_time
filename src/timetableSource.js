@@ -1,4 +1,4 @@
-import { BASE_URL, API_KEY } from "./apiConfig"
+import { STATION_API_KEY, STATION_URL} from "./apiConfig"
 
 
 //ny kod
@@ -19,7 +19,7 @@ function responseACB(resp){
     }
     //else{
 
-    //console.log("w")
+    console.log("resp is: ", resp);
     return resp.json(); 
     //}  
     //return resp.text;
@@ -32,16 +32,18 @@ function keepArrayACB(res){
     return res.results;
 }
 
-export function getMenuDetails(array_of_dish_ids){
+export function getStationID(stationName, boolParam, maxResults){
+
+    const url = `${STATION_URL}?key=${STATION_API_KEY}&searchstring=${stationName}&stationsonly=${boolParam}&maxresults=${maxResults}`;
     //modify base url to get data for whole array of ids
-    const param= array_of_dish_ids.join(',');
-    const url = BASE_URL+"recipes/informationBulk";
-    const url2 = `${url}?ids=${param}`;
+    //const param= array_of_dish_ids.join(',');
+    //const url = BASE_URL+"recipes/informationBulk";
+    //const url2 = `${url}?ids=${param}`;
     //const url = `${BASE_URL}informationbulk?ids=456%2C987%2C321`;
-    console.log("url2 is: ", url2); 
-    return fetch(url2, {
+    console.log("url is: ", url); 
+    return fetch(url, {
         method: 'GET',
-        headers:{'X-Mashape-Key': API_KEY},
+        //headers:{'X-Mashape-Key': API_KEY},
     }).then(responseACB);
 }
 export function getDishDetails(id) {

@@ -35,7 +35,11 @@ export default {
 
     getStationDetails(){
         const prom = getTimeDetails();
-    }
+    },
+
+    removeStation(stationToRemove   ){
+
+    },
 
 
 
