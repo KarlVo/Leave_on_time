@@ -1,4 +1,5 @@
-import model from '/src/CommuteModel.js'; 
+import model from '/src/CommuteModel.js';
+import "/src/style.css";
 
 console.log("hejhej");
 
