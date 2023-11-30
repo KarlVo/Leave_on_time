@@ -3,7 +3,13 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 function TestView(props) {
-  const spacing = '16px'; // Adjust the spacing as needed
+  const spacing = '20px'; // Adjust the spacing as needed
+
+
+  function handleAPICall(){
+    props.stationTable();
+  }
+
 
   return (
     <Box display="flex">
@@ -11,6 +17,7 @@ function TestView(props) {
         Add Route
       </Button>
       <Button variant="contained">Settings</Button>
+      <Button onClick={handleAPICall} variant="contained">Hämta API test</Button>
     </Box>
   );
 }

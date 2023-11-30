@@ -34,6 +34,7 @@ export default {
     },
 
     getStationDetails(){
+        console.log("nu kom vi hit");
         const prom = getTimeDetails();
     },
 

@@ -6,9 +6,17 @@ export default
 observer(
 
     function Test(props){
+        function firstCB(test){
+            props.model.getStationDetails();
+        }
 
-    return <TestView /> 
-    }
 
+        return (
+                <TestView 
+                    stationTable={firstCB}
+                
+                /> 
+        
+        )
 
-)
+})

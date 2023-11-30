@@ -1,4 +1,4 @@
-import { STATION_API_KEY, STATION_URL} from "./apiConfig"
+import {BASE_URL, STATION_API_KEY, STATION_URL} from "./apiConfig"
 
 
 //ny kod
