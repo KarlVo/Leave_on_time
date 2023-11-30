@@ -51,7 +51,7 @@ export function getDishDetails(id) {
     const x = [id];
     
 
-    return getMenuDetails(x).then(arrayObjACB)
+    return getStationID(x).then(arrayObjACB)
 
 }
 export function searchDishes(searchParams){
