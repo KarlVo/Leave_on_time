@@ -1,7 +1,9 @@
 //array with objects
 //struct /object
 
-import { getTimeDetails } from "./timetableSource";
+import { getDishDetails, getTimeDetails } from "./timetableSource";
+import { getStationID } from "./timetableSource";
+import resolvePromise from "./resolvePromise.js";
 
 //attributes:
 //  name
@@ -28,17 +30,28 @@ export default {
     currentID: null,
     myStations: [],
 
+    stationIDPromiseState: {},
+    stationDetailsPromiseState: {},
 
-    addStation(){
-        console.log("hej");
+    setCurrentStation(stationName){
+        stationName = 'Slussen';
+        console.log("add Station");
+        const prom = getStationDetails(stationName, true, 1);
+        resolvePromise(prom, this.stationIDPromiseState);
     },
 
     getStationDetails(){
         console.log("nu kom vi hit");
+    getStationDetails(stationID){
         const prom = getTimeDetails();
     },
 
-    removeStation(stationToRemove   ){
+    addStation(stationToAdd){
+        this.myStations = [...this.myStations, stationToAdd];
+    },
+    removeStation(stationToRemove){
+        console.log("remove Station");
+
 
     },
 
