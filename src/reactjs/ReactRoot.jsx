@@ -6,7 +6,7 @@ import Test from "./testPresenter.jsx";
 export default
 //observer(     //will be added in week 3
 function ReactRoot(props){
-    console.log("hej")
+    //console.log("hej")
     return (<div className="flexParent">
                 <div className="sidebar">
                     <h1><img src="/src/img/logo.png" alt="Leave on Time" width="100%" /></h1>
