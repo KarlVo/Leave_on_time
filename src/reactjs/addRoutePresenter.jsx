@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite';
 
-import TestView from "../views/testView";
+import AddRouteView from "../views/addRouteView.jsx";
 
 export default
 observer(
 
-    function Test(props){
+    function addRoute(props){
         function firstCB(test){
             props.model.getStationDetails();
         }
@@ -14,13 +14,9 @@ observer(
             props.model.setCurrentStation();
         }
 
-        function openAddRouteCB(){
-            //
-        }
-
         return (
-                <TestView 
-                    stationTable={firstCB} textEntry={searchStationID_CB} openAddRoute={openAddRouteCB}
+                <AddRouteView 
+                    textEntry={searchStationID_CB}
                 
                 /> 
         

@@ -16,9 +16,13 @@ function TestView(props) {
     props.textEntry(event.target.value);
   }
 
+  function openAddRoute(){
+    props.openAddRoute();
+  }
+
   return (
     <Box display="flex">
-      <Button variant="contained" style={{ marginRight: spacing }}>
+      <Button onClick={openAddRoute} variant="contained" style={{ marginRight: spacing }}>
         Add Route
       </Button>
       <Button variant="contained">Settings</Button>

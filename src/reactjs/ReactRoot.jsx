@@ -2,7 +2,7 @@
 //import Sidebar from "./sidebarPresenter.jsx";
 //import SearchForm from "./searchFormPresenter.jsx";
 import Test from "./testPresenter.jsx";
-
+import AddRoute from "./addRoutePresenter.jsx";
 export default
 //observer(     //will be added in week 3
 function ReactRoot(props){
@@ -14,6 +14,7 @@ function ReactRoot(props){
                     <div>Misc. Sidebar Content. Buttons? Forms? Navigation?</div>
                     Exempel på loader i det här fältet:
                     <div className="progress white"></div>
+                    <AddRoute model={props.model} />
                 </div>
                 <div className="mainContent">
                     <Test model={props.model} />
