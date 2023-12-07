@@ -15,6 +15,7 @@ function resolvePromise(prms, promiseState) {
         
   
         // Assign the value to promiseState.data
+        //console.log("vi kollar resultat", result)
         promiseState.data = result;
       }
     }

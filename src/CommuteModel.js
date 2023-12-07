@@ -55,7 +55,7 @@ export default {
 
     //omar lägger till lite kod som säkert redan överrenstämmer med det simon har skrivit
     stations:[
-        {id: 1, name: 'station'}
+        {name: null, towards: null, line: null, min: null, id: null}
     ],
 
 
@@ -101,17 +101,20 @@ export default {
         return this.locations.find(location => location.id === this.currentLocation);
     },
 
+
+    //den här är för namenet, x, y koordinater
     setCurrentStation(stationName){
         const oldStation = this.currentStation;
         this.currentStation = stationName;
-        if(oldStation !==this.currentStation){
+        //if(oldStation !==this.currentStation){
         //stationName = 'Slussen';
         console.log("add Station");
         const prom = getStationID(stationName, true, 1);
         resolvePromise(prom, this.stationIDPromiseState);
-        }
+        //}
     },
 
+    // det här är för tiden
     getStationDetails(){
         console.log("nu kom vi hit");
         const prom = getTimeDetails();
@@ -127,6 +130,17 @@ export default {
 
 
     },
+
+    saveInfo(informationObject){
+        this.setCurrentStation(informationObject.name)
+        /*parsa igenom informationen som vi får tillbaka, hitta ID, X och Y location*/
+        informationObject.id = this.stationIDPromiseState.data.stationID/* Parsning av ID*/
+        informationObject.X = this.stationIDPromiseState.data.stationX/*X värdet*/
+        informationObject.Y = this.stationIDPromiseState.data.stationY/* Y */
+        this.stations.push(informationObject);
+        console.log(this.stations)
+
+    }
 
 
 

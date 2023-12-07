@@ -64,23 +64,30 @@ export function getStationID(stationName, boolParam, maxResults){
     return fetch(url, {
         method: 'GET',
         //headers:{'X-Mashape-Key': API_KEY},
-    }).then(responseACB);
+    }).then(responseACB).then(filterID_ACB);
 }
-//export function getDishDetails(id) {
 
-  //  const x = [id];
-    
 
-    //return getStationID(x).then(arrayObjACB)
+function filterID_ACB(resp){
+    let stationID;
+    let stationX;
+    let stationY;
+    let test;
+    const jsonObject = JSON.parse(resp);
+    //test = jsonObject.ResponseData[0];
+    //
 
-//}
-export function searchDishes(searchParams){
-    //const param = searchParams.query;
-    const param = new URLSearchParams(searchParams);   //Använder den här funktionen för att göra om sökningen till en riktig URL
-    const url = BASE_URL+"recipes/complexSearch"
-    const url2 = `${url}?${param}`
-    return fetch(url2, {
-        method: 'GET',
-        headers:{'X-Mashape-Key': API_KEY},
-    }).then(responseACB).then(keepArrayACB);
+    stationID = jsonObject.ResponseData[0].SiteId;
+    stationX = jsonObject.ResponseData[0].X;
+    stationY = jsonObject.ResponseData[0].Y;
+    console.log("har vi kommit hitrå")
+    return {
+        stationID: stationID,
+        stationX: stationX,
+        stationY: stationY
+    };
+    // console.log(stationID);
+    // console.log(stationX);
+    // console.log(stationY);
+
 }

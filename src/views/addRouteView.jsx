@@ -9,6 +9,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Autocomplete from '@mui/material/Autocomplete';
 import metroArray from '/src/metrosArray';
 import InputLabel from '@mui/material/InputLabel';
+import SaveIcon from '@mui/icons-material/Save';
+
 function addRouteView(props) {
     //const spacing = '20px'; // Adjust the spacing as needed
     
@@ -18,23 +20,23 @@ function addRouteView(props) {
     
     function textChangeStation(event){
         console.log("textChangeStation");
-        props.textEntry(event.target.value);
+        props.textStation(event.target.value);
       }
 
     function textChangeTowards(event){
         console.log("textChangeTowards");
-        //props.textEntry(event.target.value);
+        props.textTowards(event.target.value);
       }
     
     function textChangeLine(event){
         console.log("textChangeLine");
-        //props.textEntry(event.target.value);
+        props.textLine(event.target.value);
       }
     
     function handleChange(event) {
         console.log("handleChange");
         setSelectedValue(event.target.value);
-        //props.textEntry(event.target.value);
+        props.textMin(event.target.value);
       }
 
     function closeAddRoute(){
@@ -42,10 +44,14 @@ function addRouteView(props) {
         window.location.hash="#/";
     }
 
+    function saveRoute(){
+      console.log("saveRoute");
+      props.submitEvent();
+    }
     
     return (
       <Box display="flex" flexDirection='column'>
-        
+       
         <Box display="flex" justifyContent="flex-end">
           <CloseIcon onClick={closeAddRoute} />
         </Box>
@@ -76,7 +82,9 @@ function addRouteView(props) {
         <Box flexDirection='column' marginBottom={2}>
           <TextField onChange={textChangeLine} id="outlined-basic" label="Line" variant="outlined" fullWidth/>
         </Box>
-        
+        <Box display="flex">
+          <SaveIcon onClick={saveRoute} />
+        </Box>
       </Box>
     );
   }
