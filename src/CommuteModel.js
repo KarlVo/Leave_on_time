@@ -53,6 +53,14 @@ export default {
     currentStation: null,
     myStations: [],
 
+    //omar lägger till lite kod som säkert redan överrenstämmer med det simon har skrivit
+    stations:[
+        {id: 1, name: 'station'}
+    ],
+
+
+
+
     stationIDPromiseState: {},
     stationDetailsPromiseState: {},
 
