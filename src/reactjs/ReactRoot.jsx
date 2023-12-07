@@ -3,26 +3,43 @@
 //import SearchForm from "./searchFormPresenter.jsx";
 import Test from "./testPresenter.jsx";
 import AddRoute from "./addRoutePresenter.jsx";
-export default
-//observer(     //will be added in week 3
-function ReactRoot(props){
-    //console.log("hej")
-    return (<div className="flexParent">
-                <div className="sidebar">
-                    <h1><img src="/src/img/logo.png" alt="Leave on Time" width="100%" /></h1>
+import Sidebar from "./sidebarPresenter.jsx";
+import Location from "./locationPresenter.jsx";
+import { observer } from 'mobx-react-lite';
+import { createHashRouter, RouterProvider } from "react-router-dom";
 
-                    <div>Misc. Sidebar Content. Buttons? Forms? Navigation?</div>
-                    Exempel på loader i det här fältet:
-                    <div className="progress white"></div>
-                    <AddRoute model={props.model} />
-                </div>
-                <div className="mainContent">
-                    <Test model={props.model} />
-                    
-                    <hr></hr>
-                    Exempel på loader i det här fältet:
-                    <div className="progress"></div>
-                </div>
-            </div>);
+function makeRouter(model){
+    return createHashRouter([
+        {
+            path: "",
+            element: <Location model={model} />
+        },
+        {
+            path: "test",
+            element: <Test model={model} />
+        }
+    ]);
 }
-//)
+
+export default
+observer(
+// <div className="progress white"></div>
+// <div className="progress"></div>
+
+    function ReactRoot(props){
+        console.log("hej")
+        if (!props.model) {
+            return "no data";
+        }
+        return (<div className="flexParent">
+                    <div className="sidebar">
+                        <h1><img src="/src/img/logo.png" alt="Leave on Time" width="100%" /></h1>
+                        <Sidebar model={props.model} />
+                        <AddRoute model={props.model} />
+                    </div>
+                    <div className="mainContent">
+                        <RouterProvider router={makeRouter(props.model)}/>
+                    </div>
+                </div>);
+    }
+);
