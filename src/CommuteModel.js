@@ -50,6 +50,7 @@ export default {
     commuteDistances: [],
     intrestedLines: [],
     currentID: null,
+    currentStation: null,
     myStations: [],
 
     stationIDPromiseState: {},
@@ -93,10 +94,14 @@ export default {
     },
 
     setCurrentStation(stationName){
-        stationName = 'Slussen';
+        const oldStation = this.currentStation;
+        this.currentStation = stationName;
+        if(oldStation !==this.currentStation){
+        //stationName = 'Slussen';
         console.log("add Station");
         const prom = getStationID(stationName, true, 1);
         resolvePromise(prom, this.stationIDPromiseState);
+        }
     },
 
     getStationDetails(){
