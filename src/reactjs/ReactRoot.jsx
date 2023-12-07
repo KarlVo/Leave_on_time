@@ -15,6 +15,10 @@ function makeRouter(model){
             element: <Location model={model} />
         },
         {
+            path: "addroute",
+            element: <AddRoute model={model} />
+        },
+        {
             path: "test",
             element: <Test model={model} />
         }
@@ -35,7 +39,6 @@ observer(
                     <div className="sidebar">
                         <h1><img src="/src/img/logo.png" alt="Leave on Time" width="100%" /></h1>
                         <Sidebar model={props.model} />
-                        <AddRoute model={props.model} />
                     </div>
                     <div className="mainContent">
                         <RouterProvider router={makeRouter(props.model)}/>
