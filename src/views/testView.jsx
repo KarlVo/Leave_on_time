@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import metroArray from '/src/metrosArray';  // Update the path accordingly
 
 
 function TestView(props) {
@@ -43,7 +43,7 @@ function TestView(props) {
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={stations}
+        options={metroArray}
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Stations" />}
 />

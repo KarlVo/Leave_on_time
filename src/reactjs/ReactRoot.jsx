@@ -19,7 +19,7 @@ function makeRouter(model){
             element: <AddRoute model={model} />
         },
         {
-            path: "test",
+            path: "/test",
             element: <Test model={model} />
         }
     ]);
