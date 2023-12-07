@@ -2,6 +2,8 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 
 function TestView(props) {
@@ -20,6 +22,16 @@ function TestView(props) {
     props.openAddRoute();
   }
 
+
+  
+    const stations = [
+      'Station 1',
+      'Station 2',
+      'Station 3',
+      // Add more station names as needed
+    ];
+  
+
   return (
     <Box display="flex">
       <Button onClick={openAddRoute} variant="contained" style={{ marginRight: spacing }}>
@@ -28,6 +40,13 @@ function TestView(props) {
       <Button variant="contained">Settings</Button>
       <Button onClick={handleAPICall} variant="contained">Hämta API test</Button>
       <TextField onChange={textChange} id="outlined-basic" label="Outlined" variant="outlined" />
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={stations}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Stations" />}
+/>
 
     </Box>
   );

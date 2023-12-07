@@ -4,10 +4,29 @@ import {BASE_URL, STATION_API_KEY, STATION_URL} from "./apiConfig"
 //ny kod
 export function getTimeDetails(){
     console.log("vad är url", BASE_URL);
-    return fetch(BASE_URL, {method: 'GET' }).then(responseACB)
+    return fetch(BASE_URL, {method: 'GET' }).then(responseACB).then(filterACB)
 
 }
 
+
+function filterACB(resp){
+    let firstMetroDisplayTime; // Declare the variable outside the if block
+
+    const jsonObject = JSON.parse(resp);
+  
+    // Check if there are metros in the array
+    if (jsonObject.ResponseData.Metros.length > 0) {
+      // Access the DisplayTime of the first Metro
+      firstMetroDisplayTime = jsonObject.ResponseData.Metros[0].DisplayTime;
+
+      // Log the DisplayTime
+      console.log("First Metro DisplayTime:", firstMetroDisplayTime);
+    } else {
+      console.log("No Metros available.");
+    }
+
+    return firstMetroDisplayTime
+}
 
 function arrayObjACB(ar){
     console.log("arr is: ", ar);
