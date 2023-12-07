@@ -6,6 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem'
 import CloseIcon from '@mui/icons-material/Close';
+import Autocomplete from '@mui/material/Autocomplete';
+import metroArray from '/src/metrosArray';
+import InputLabel from '@mui/material/InputLabel';
 function addRouteView(props) {
     //const spacing = '20px'; // Adjust the spacing as needed
     
@@ -47,9 +50,18 @@ function addRouteView(props) {
           <CloseIcon onClick={closeAddRoute} />
         </Box>
         <Box flexDirection='column' marginTop={2} marginBottom={2}>
-          <TextField onChange={textChangeStation} id="outlined-basic" label="New Station name" variant="outlined" fullWidth/>
+        
+          <Autocomplete
+          fullWidth
+        disablePortal
+        id="combo-box-demo"
+        options={metroArray}
+        
+        renderInput={(params) => <TextField {...params} label="New Station" onChange={textChangeStation} variant="outlined" id="outlined-basic" fullWidth />}
+/>
         </Box>
-          <FormControl>
+          <FormControl variant="outlined" fullWidth>
+          <InputLabel htmlFor="time-to-station">Time to Station</InputLabel>
               <Select label="Time to Station" value={selectedValue} onChange={handleChange}>
                   <MenuItem value="">Select number of minutes</MenuItem>
                   {numberOptions.map((number) => (

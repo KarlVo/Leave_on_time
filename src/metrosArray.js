@@ -84,8 +84,6 @@ const metroArray = [
     "Svedmyra",
     "Sätra",
     "Tallkrogen",
-    "T-Centralen (tidigare Centralen)",
-    "T-Centralen",
     "T-Centralen",
     "Tekniska högskolan",
     "Telefonplan",
