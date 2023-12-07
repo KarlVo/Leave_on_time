@@ -26,7 +26,7 @@ observer(
            
            
             if (!props.model.stationDetailsPromiseState.data){
-                return (<img className="suspense" src="https://brfenergi.se/iprog/loading.gif"></img>);
+                return (<div className="progressContainer"><div className="progress"></div></div>);
             }
             console.log("härdå")
             return (

@@ -28,6 +28,14 @@ body {
 
 /* Progress Loader */
 
+.progressContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: calc(80vh - 80px);
+    align-items: center;
+}
+
 .progress {
     position: relative;
     background-color: #0050C2;
