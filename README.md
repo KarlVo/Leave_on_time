@@ -19,11 +19,35 @@ precious seconds from your daily routine.
 From api --> departure times for busses and metro.
 App --> model with: user data, distance to station etc. persistance with firebase (user settings, routes, etc.)
 
+## Description
+### Essential:
+/src/reactjs/ReactRoot.jsx
+/src/index.jsx
+
+### Model:
+/src/CommuteModel.js
+/src/firebaseModel.se
+/src/MetrosArray.js
+/src/timetableSource.js
+
+### Presenters:
+/src/reactjs/addRoutePresenter.jsx
+/src/reactjs/locationPresenter.jsx
+/src/reactjs/sidebarPresenter.jsx
+
+### Views:
+/src/view/addRouteView.jsx
+/src/view/locationView.jsx
+/src/view/sidebarView.jsx
+/src/view/testView.jsx
+/src/view/searchResultsView.jsx
+/src/view/settingsView.jsx
+
 ## DONE
 - A functional sidebar
 - A basic layout
 - A model
-- A basic API call (called to pre-fill the possible stations when adding route).
+- A basic API call (only visible through consos.
 
 ## TODO
 - A login functionality
