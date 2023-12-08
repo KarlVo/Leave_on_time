@@ -21,27 +21,27 @@ App --> model with: user data, distance to station etc. persistance with firebas
 
 ## Description
 ### Essential:
-/src/reactjs/ReactRoot.jsx
-/src/index.jsx
+- /src/reactjs/ReactRoot.jsx
+- /src/index.jsx
 
 ### Model:
-/src/CommuteModel.js
-/src/firebaseModel.se
-/src/MetrosArray.js
-/src/timetableSource.js
+- /src/CommuteModel.js
+- /src/firebaseModel.se
+- /src/MetrosArray.js
+- /src/timetableSource.js
 
 ### Presenters:
-/src/reactjs/addRoutePresenter.jsx
-/src/reactjs/locationPresenter.jsx
-/src/reactjs/sidebarPresenter.jsx
+- /src/reactjs/addRoutePresenter.jsx
+- /src/reactjs/locationPresenter.jsx
+- /src/reactjs/sidebarPresenter.jsx
 
 ### Views:
-/src/view/addRouteView.jsx
-/src/view/locationView.jsx
-/src/view/sidebarView.jsx
-/src/view/testView.jsx
-/src/view/searchResultsView.jsx
-/src/view/settingsView.jsx
+- /src/view/addRouteView.jsx
+- /src/view/locationView.jsx
+- /src/view/sidebarView.jsx
+- /src/view/testView.jsx
+- /src/view/searchResultsView.jsx
+- /src/view/settingsView.jsx
 
 ## DONE
 - A functional sidebar
