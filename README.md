@@ -18,3 +18,15 @@ precious seconds from your daily routine.
 ## App-data
 From api --> departure times for busses and metro.
 App --> model with: user data, distance to station etc. persistance with firebase (user settings, routes, etc.)
+
+## DONE
+- A functional sidebar
+- A basic layout
+- A model
+- A basic API call (called to pre-fill the possible stations when adding route).
+
+## TODO
+- A login functionality
+- Being able to save the route to proceed from the addRoute page
+- Firebase persistance
+- A card design for the various stations added to each location.
