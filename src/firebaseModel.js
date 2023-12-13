@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set} from "/src/teacherFirebase.js";
-import { getDishDetails, getMenuDetails } from "./dishSource";
+import {  } from "./timetableSourceSource";
 // you will find 2 imports already there, add the configuration and instantiate the app and database:
 import firebaseConfig from "/src/firebaseConfig.js";
 const app= initializeApp(firebaseConfig)
@@ -29,10 +29,21 @@ function observerRecap(/*TODO*/) {
 function modelToPersistence(model/* TODO */){
     // TODO return an object
     return {
-        currentDishFB: model.currentDish, //det här ÄR redan id
-        numberOfGuestsFB: model.numberOfGuests,
-        dishesID:    model.dishes.map(dish => dish.id).sort((a, b) => a - b) //här vill jag endast ha id av dish arrayen och sen sorterar jag de
-      };
+        currentLocationFB: model.currentLocation, //det här ÄR redan id
+        locationsFB: model.locations,
+        //dishesID:    model.dishes.map(dish => dish.id).sort((a, b) => a - b) //här vill jag endast ha id av dish arrayen och sen sorterar jag de
+        addingLocationFB: model.addingLocation,
+
+        commuteStationsFB: model.commuteStations,
+        commuteDistancesFB: model.commuteDistances,
+        intrestedLinesFB: model.intrestedLines,
+
+        currentIDFB: model.currentID,
+        currentStationFB: model.currentStation,
+        stationsFB: model.stations,
+        myStationsFB: model.myStations,
+
+    };
 }
 
 function persistenceToModel(data, model/* TODO */) {
@@ -40,30 +51,37 @@ function persistenceToModel(data, model/* TODO */) {
 
     // Check if data is falsy or empty
     if (!data) {
-        model.currentDish = null;
-        model.numberOfGuests = 2; // or whatever default value makes sense for your application
-        model.dishes = []; // Assuming dishes should be an empty array
 
+        model.currentLocation = null; //9304
+        model.locations = [];
+        model.addingLocation = false;
+        model.commuteStations = [];
+        model.commuteDistances = [];
+        model.intrestedLines = [];
+        model.currentID = null;
+        model.currentStation = null;
+        model.stations = [];
+        model.myStations = [];
         return Promise.resolve(); // Return a resolved promise for an empty database
     }
 
-    // Ensure data.currentDishFB is not null or undefined
-    if (data.currentDishFB === null || data.currentDishFB === undefined) {
-        model.currentDish = null;
+    //!currentLocation
+    if (data.currentLocationFB === null || data.currentLocationFB === undefined) {
+        model.currentLocation = null;
     } else {
-        model.currentDish = data.currentDishFB;
+        model.currentLocation = data.currentLocationFB;
     }
 
-    
-    if(!data.numberOfGuestsFB){
-        model.numberOfGuests = 2;
+    //!locations
+    if(!data.currentIDFB){
+        model.currentID = 9304;
     }
     else{
-    model.numberOfGuests = data.numberOfGuestsFB;
+    model.currentID = data.currentIDFB;
     }
     //console.log("testish", data.dishesID)
 
-    if (data.dishesID){
+    if (data.currentID){
         
     return getMenuDetails(data.dishesID)
         .then(saveToModelACB)
