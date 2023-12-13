@@ -1,8 +1,63 @@
-html, body {
+html {
     padding: 0;
     margin: 0;
 }
+
 body {
+    background-color: #0050C2;
+    padding: 20px;
+    margin: 0;
+}
+
+.sidebar {
+    display: flex;
+    min-height: calc(100vh - 80px);
+    margin: 20px;
+}
+
+.mainContent {
+    min-height: calc(100vh - 80px);
+    margin: 20px;
+}
+
+.pageHead {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    min-height: 100px;
+}
+
+.pageHead .navItem {
+    font-weight: 300;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+}
+
+.block {
+    padding: 20px;
+}
+
+.addBlock {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+}
+
+.sidebarCol {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.sidebarCol .bottom {
+    width: 300px;
+    margin-top: auto;
+}
+
+/*body {
     background-color: #0050C2;
 }
 
@@ -28,7 +83,7 @@ body {
 
 /* Progress Loader */
 
-.progressContainer {
+/*.progressContainer {
     display: flex;
     justify-content: center;
     width: 100%;
