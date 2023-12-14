@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 
 export default observer (
     function SidebarView(props) {
-        const locationName = '';
+        let locationName = '';
 
         const [addLocationForm, setAddLocationFormOpen] = React.useState(false);
 

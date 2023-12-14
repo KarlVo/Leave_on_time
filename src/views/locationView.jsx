@@ -38,7 +38,7 @@ export default observer (
             return () => clearInterval(interval);
         }, []);
 
-        var newLocationName = '';
+        let newLocationName = '';
 
         function newLocationNameACB(evt) {
             newLocationName = evt.target.value;
