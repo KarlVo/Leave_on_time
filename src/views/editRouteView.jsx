@@ -12,7 +12,7 @@ import PlaceIcon from '@mui/icons-material/Place';
 import Typography from '@mui/material/Typography';
 
 export default observer (
-    function AddRouterView(props) {
+    function EditRouterView(props) {
         function locationPageACB(evt) {
             window.location.hash='';
         }
@@ -25,14 +25,15 @@ export default observer (
                             <Box className='pageHead'>
                                 <Breadcrumbs aria-label='breadcrumb'>
                                     <Typography variant='h4' component='h2'><Chip className='navItem' icon={<PlaceIcon />} onClick={locationPageACB} label={props.location.name} /></Typography>
-                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' onDelete={locationPageACB} label='ADD ROUTE' /></Typography>
+                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' label={'ROUTE NAME'} /></Typography>
+                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' onDelete={locationPageACB} label='EDIT ROUTE' /></Typography>
                                 </Breadcrumbs>
                             </Box>
                         </Grid>
                     </Grid>
                     <Divider />
                     <Grid container spacing={'40px'} sx={{padding: '40px'}}>
-                        [AddRoute Content]
+                        [EditRoute Content]
                     </Grid>
                 </Paper>
             </Grid>

@@ -1,12 +1,13 @@
 import {observable, configure} from 'mobx';
 import {createRoot} from 'react-dom/client';
 
-import model from '/src/CommuteModel.js';
-import ReactRoot from './reactjs/ReactRoot.jsx';
+import model from '/src/model/MockModel.js';
+import App from '/src/App.jsx';
 
 configure({enforceActions: 'never'});
 
 const reactiveModel = observable(model);
-window.myModel= reactiveModel; // For debugging
 
-createRoot(document.getElementById('root')).render(<ReactRoot model={reactiveModel}/>);
+createRoot(document.getElementById('root')).render(<App model={reactiveModel}/>);
+
+window.myModel = reactiveModel; // For debugging
