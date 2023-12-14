@@ -1,11 +1,12 @@
 import {observer} from 'mobx-react-lite';
 import {createHashRouter, RouterProvider} from 'react-router-dom';
 
-import '/src/style.css';
 import AddRoute from '/src/presenters/addRoutePresenter.jsx';
-import Sidebar from '/src/presenters/sidebarPresenter.jsx';
-import Location from '/src/presenters/locationPresenter.jsx';
 import EditRoute from '/src/presenters/editRoutePresenter.jsx';
+import Location from '/src/presenters/locationPresenter.jsx';
+import Sidebar from '/src/presenters/sidebarPresenter.jsx';
+
+import '/src/style.css';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
