@@ -27,9 +27,9 @@ function makeRouter(model) {
 
 export default observer(
     function ReactRoot(props) {
-        if (1) {
-            return (<Design model={props.model} />);
-        }
+        //if (1) {
+        //    return (<Design model={props.model} />);
+        //}
         if (!props.model) {
             return (<div>"no data"</div>);
         }

@@ -124,8 +124,25 @@ function readFromFirebase(model){
 
 function connectToFirebase(model, watchFunction) {
     // Read the model from firebase when the app starts
+    if (user)
     readFromFirebase(model);
+    //! here we need an ACB that is passed to onAuthStateChanged
+    // onAuthStateChanged(auth, authACB);
+    // function authACB(user){
+    //     if(user){
+    //         console.log("user is signed in");
+    //     }else{
+    //         console.log("user is signed out");
+    //     }
+    // }
 
+    function authACB(user){
+        if(user){
+            console.log("user is signed in");
+        }else{
+            console.log("user is signed out");
+        }
+    }
     // Save the model to firebase whenever model's numberOfGuests, dishes, or currentDish change
     watchFunction(checkACB, effectACB);
 

@@ -5,6 +5,10 @@ import {createRoot} from 'react-dom/client';
 import model from '/src/CommuteModel.js';
 import ReactRoot from './reactjs/ReactRoot.jsx';
 
+import {getAuth, onAuthStateChanged} from 'firebase/auth';
+
+const auth = getAuth();
+
 configure({enforceActions: 'never'});
 
 const reactiveModel = observable(model);
