@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, set} from "/src/teacherFirebase.js";
-import {  } from "./timetableSourceSource";
+import { getDatabase, ref, get, set} from "/src/testFirebase.js";
+import {  } from "./timetableSource";
 // you will find 2 imports already there, add the configuration and instantiate the app and database:
 import firebaseConfig from "/src/firebaseConfig.js";
 const app= initializeApp(firebaseConfig)

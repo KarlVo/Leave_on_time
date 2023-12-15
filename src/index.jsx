@@ -1,4 +1,5 @@
-import {observable, configure} from 'mobx';
+import connectToFirebase from '/src/firebaseModel.js';
+import {observable, configure, reaction} from 'mobx';
 import {createRoot} from 'react-dom/client';
 
 import model from '/src/CommuteModel.js';
@@ -10,3 +11,5 @@ const reactiveModel = observable(model);
 window.myModel= reactiveModel; // For debugging
 
 createRoot(document.getElementById('root')).render(<ReactRoot model={reactiveModel}/>);
+
+connectToFirebase(reactiveModel, reaction);

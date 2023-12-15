@@ -11,16 +11,17 @@
     },
     "devDependencies": {
         "@vitejs/plugin-react": "4.2.0",
-        "vite": "^4.4.11",
-        "cors-anywhere": "0.4.4"
+        "cors-anywhere": "0.4.4",
+        "chai": "^4.3.7",
+        "vite": "^4.4.11"
     },
     "dependencies": {
+        "firebase": "^9.17.1",
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@mui/icons-material": "^5.14.19",
         "@mui/material": "^5.14.19",
         "@mui/styled-engine-sc": "^6.0.0-alpha.7",
-        "firebase": "^9.17.1",
         "mobx": "^6.8.0",
         "mobx-react-lite": "^3.4.2",
         "react": "^18.0.0",
