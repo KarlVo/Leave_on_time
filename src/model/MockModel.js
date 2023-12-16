@@ -1,53 +1,45 @@
+import resolvePromise from '/src/resolvePromise.js';
+import {searchStations} from '/src/stationSource.js';
+
 export default {
 
     locations: [
         {
             id: 1,
             name: 'School',
-            stations: [
-                {
-                    id: 345,
-                    distance: 6,
-                    lines: [345, 23, 95]
-                }
-            ]
+            routes: []
         },
         {
             id: 2,
             name: 'Home',
-            stations: [
-                {
-                    id: 345,
-                    distance: 6,
-                    lines: [345, 23, 95]
-                }
-            ]
+            routes: []
         },
         {
             id: 3,
             name: 'Work',
-            stations: [
-                {
-                    id: 345,
-                    distance: 6,
-                    lines: [345, 23, 95]
-                }
-            ]
+            routes: []
         },
         {
             id: 4,
             name: 'Parrents',
-            stations: [
-                {
-                    id: 345,
-                    distance: 6,
-                    lines: [345, 23, 95]
-                }
-            ]
+            routes: []
         }
     ],
 
+    // route: {
+    //     id: null,
+    //     fromID: null,
+    //     fromName: null,
+    //     toID: null,
+    //     toName: null,
+    //     stationDistance: null
+    // },
+
     currentLocation: 2,
+
+    // getFromStationsPromiseState: {},
+    // getToStationsPromiseState: {},
+    getStationsPromiseState: {},
 
     addLocation(locationName) {
         const locationID = this.locations.slice(-1)[0].id + 1;
@@ -56,7 +48,7 @@ export default {
             {
                 id: locationID,
                 name: locationName,
-                stations: []
+                routes: []
             }
         ];
     },
@@ -80,9 +72,50 @@ export default {
     },
 
     lastLocation() {
-        if (this.locations.length < 2) {
-            return true;
-        }
-        return false;
+        return this.locations.length < 2;
     },
+
+    // getStations(pos, searchString) {
+    //     if (pos === 'from') {
+    //         resolvePromise(searchStations(searchString), this.getFromStationsPromiseState);
+    //     } else {
+    //         resolvePromise(searchStations(searchString), this.getToStationsPromiseState);
+    //     }
+    // },
+
+    getStations(searchString) {
+        resolvePromise(searchStations(searchString), this.getStationsPromiseState);
+    },
+    
+    // updateNewRoute(param, value) {
+    //          if (param === 'fromID') { this.route.fromID = value; }
+    //     else if (param === 'fromName') { this.route.fromName = value; }
+    //     else if (param === 'toID') { this.route.toID = value; }
+    //     else if (param === 'toName') { this.route.toName = value; }
+    //     else if (param === 'stationDistance') { this.route.stationDistance = value; }
+    // },
+
+    // saveNewRoute() {
+    //     const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+
+    //     if (this.locations[idx].routes.length > 0) {
+    //         this.route.id = this.locations[idx].routes.slice(-1)[0].id + 1;
+    //     } else {
+    //         this.route.id = 1;
+    //     }
+
+    //     this.locations[idx].routes = [
+    //         ...this.locations[idx].routes,
+    //         this.route
+    //     ];
+        
+    //     this.route = {
+    //         id: null,
+    //         fromID: null,
+    //         fromName: null,
+    //         toID: null,
+    //         toName: null,
+    //         stationDistance: null
+    //     }
+    // }
 }
