@@ -4,8 +4,8 @@ import AddRouteView from "/src/views/addRouteView.jsx";
 
 export default observer (
     function AddRoute(props) {
-        function getStationsACB(searchString) {
-            props.model.getStations(searchString);
+        function getStationsACB(num, searchString) {
+            props.model.getStations(num, searchString);
         }
 
         // function getStationsACB(pos, searchString) {

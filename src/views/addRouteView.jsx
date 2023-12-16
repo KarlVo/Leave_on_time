@@ -78,7 +78,17 @@ export default observer (
 
             if (index === 1) {
                 return (
-                    <Box>Hej2</Box>
+                    <Grid container spacing={'40px'} sx={{padding: '40px 0'}}>
+                        <Grid xs={true}>
+                                <TextField onInput={searchStationsStringUpdateACB} fullWidth id="outlined-basic" label="Station or Bus Stop" variant="outlined" />
+                        </Grid>
+                        <Grid xs={'auto'}>
+                                <Button onClick={searchStationsSubmitACB} variant='outlined' sx={{paddingTop:'15px', paddingBottom: '14px'}}>Search</Button>
+                        </Grid>
+                        <Grid xs={12}>
+                            {props.toStations ? <ButtonGroup fullWidth orientation="vertical" aria-label="vertical button group">{props.toStations.map(stationListACB)}</ButtonGroup> : <Box></Box>}
+                        </Grid>
+                    </Grid>
                 );
             }
 
@@ -95,12 +105,18 @@ export default observer (
         // }
 
         function searchStationsStringUpdateACB(evt) {
-            searchStationsString.from = evt.target.value;
+            if (activeStep === 0) {
+                searchStationsString.from = evt.target.value;
+            } else if (activeStep === 1) {
+                searchStationsString.to = evt.target.value;
+            }
         }
 
         function searchStationsSubmitACB(evt) {
-            if (searchStationsString.from !== '') {
-                props.getStations(searchStationsString.from);
+            if (activeStep === 0 && searchStationsString.from !== '') {
+                props.getStations(0, searchStationsString.from);
+            } else if (activeStep === 1 && searchStationsString.to !== '') {
+                props.getStations(1, searchStationsString.to);
             }
         }
 

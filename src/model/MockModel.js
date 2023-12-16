@@ -82,8 +82,12 @@ export default {
     //     }
     // },
 
-    getStations(searchString) {
-        resolvePromise(searchStations(searchString), this.getFromStationsPromiseState);
+    getStations(num, searchString) {
+        if (num === 0) {
+            resolvePromise(searchStations(searchString), this.getFromStationsPromiseState);
+        } else if (num === 1) {
+            resolvePromise(searchStations(searchString), this.getToStationsPromiseState);
+        }
     },
     
     // updateNewRoute(param, value) {
