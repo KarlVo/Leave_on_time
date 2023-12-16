@@ -24,7 +24,10 @@ export default observer (
         //     from: '',
         //     to: '',
         // };
-        let searchStationsString = '';
+        let searchStationsString = {
+            from: '',
+            to: ''
+        };
         let stationID = 0;
 
         const steps = [
@@ -67,7 +70,7 @@ export default observer (
                                 <Button onClick={searchStationsSubmitACB} variant='outlined' sx={{paddingTop:'15px', paddingBottom: '14px'}}>Search</Button>
                         </Grid>
                         <Grid xs={12}>
-                            {props.stations ? <ButtonGroup fullWidth orientation="vertical" aria-label="vertical button group">{props.stations.map(stationListACB)}</ButtonGroup> : <Box></Box>}
+                            {props.fromStations ? <ButtonGroup fullWidth orientation="vertical" aria-label="vertical button group">{props.fromStations.map(stationListACB)}</ButtonGroup> : <Box></Box>}
                         </Grid>
                     </Grid>
                 );
@@ -92,12 +95,12 @@ export default observer (
         // }
 
         function searchStationsStringUpdateACB(evt) {
-            searchStationsString = evt.target.value;
+            searchStationsString.from = evt.target.value;
         }
 
         function searchStationsSubmitACB(evt) {
-            if (searchStationsString !== '') {
-                props.getStations(searchStationsString);
+            if (searchStationsString.from !== '') {
+                props.getStations(searchStationsString.from);
             }
         }
 

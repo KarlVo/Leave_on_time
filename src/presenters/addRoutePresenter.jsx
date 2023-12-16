@@ -25,7 +25,8 @@ export default observer (
                 location={props.model.getLocation()}
                 // fromStations={props.model.getFromStationsPromiseState.data}
                 // toStations={props.model.getToStationsPromiseState.data}
-                stations={props.model.getStationsPromiseState.data}
+                fromStations={props.model.getFromStationsPromiseState.data}
+                toStations={props.model.getToStationsPromiseState.data}
                 getStations={getStationsACB}
                 // route={props.model.route}
                 // updateNewRoute={updateNewRouteACB}

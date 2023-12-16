@@ -37,9 +37,8 @@ export default {
 
     currentLocation: 2,
 
-    // getFromStationsPromiseState: {},
-    // getToStationsPromiseState: {},
-    getStationsPromiseState: {},
+    getFromStationsPromiseState: {},
+    getToStationsPromiseState: {},
 
     addLocation(locationName) {
         const locationID = this.locations.slice(-1)[0].id + 1;
@@ -84,7 +83,7 @@ export default {
     // },
 
     getStations(searchString) {
-        resolvePromise(searchStations(searchString), this.getStationsPromiseState);
+        resolvePromise(searchStations(searchString), this.getFromStationsPromiseState);
     },
     
     // updateNewRoute(param, value) {
