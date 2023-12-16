@@ -1,5 +1,5 @@
 import resolvePromise from '/src/resolvePromise.js';
-import {searchStations} from '/src/stationSource.js';
+import {searchStations, searchRoutes} from '/src/stationSource.js';
 
 export default {
 
@@ -39,6 +39,7 @@ export default {
 
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
+    getRoutesPromiseState: {},
 
     addLocation(locationName) {
         const locationID = this.locations.slice(-1)[0].id + 1;
@@ -72,6 +73,10 @@ export default {
 
     lastLocation() {
         return this.locations.length < 2;
+    },
+
+    getRoutes(originId, destId) {
+        resolvePromise(searchRoutes(originId, destId), this.getRoutesPromiseState);
     },
 
     getStations(num, searchString) {

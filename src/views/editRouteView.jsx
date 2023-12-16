@@ -1,9 +1,11 @@
 import {observer} from 'mobx-react-lite';
+import resolvePromise from '/src/resolvePromise.js';
 
 import React from 'react';
 
 import Box from '@mui/material/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -15,6 +17,10 @@ export default observer (
     function EditRouterView(props) {
         function locationPageACB(evt) {
             window.location.hash='';
+        }
+
+        function getRoutesACB(evt) {
+            props.getRoutes('9600', '1079');
         }
 
         return (
@@ -33,7 +39,8 @@ export default observer (
                     </Grid>
                     <Divider />
                     <Grid container spacing={'40px'} sx={{padding: '40px'}}>
-                        [EditRoute Content]
+                        <Button onClick={getRoutesACB}>Click Me!</Button>
+                        {props.routes ? console.log(props.routes) : <Box>No</Box>}
                     </Grid>
                 </Paper>
             </Grid>
