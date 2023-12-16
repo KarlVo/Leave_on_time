@@ -1,7 +1,7 @@
 import {observable, configure} from 'mobx';
 import {createRoot} from 'react-dom/client';
 
-import model from '/src/model/MockModel.js';
+import model from '/src/model/CommuteModel.js';
 import App from '/src/App.jsx';
 
 configure({enforceActions: 'never'});
