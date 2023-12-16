@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react-lite';
+import {styled} from '@mui/material/styles';
 
 import React from 'react';
 
@@ -9,8 +10,10 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Chip from '@mui/material/Chip';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Unstable_Grid2';
+import MuiInput from '@mui/material/Input';
 import Paper from '@mui/material/Paper';
 import PlaceIcon from '@mui/icons-material/Place';
+import Slider from '@mui/material/Slider';
 import Step from '@mui/material/Step';
 import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
@@ -25,6 +28,28 @@ export default observer (
             to: ''
         };
         let stationID = 0;
+
+        const Input = styled(MuiInput)({
+            width: '42px'
+        });
+
+        const [value, setValue] = React.useState(5);
+
+        const handleSliderChange = (evt, newValue) => {
+            setValue(newValue);
+        };
+        
+        const handleInputChange = (evt) => {
+            setValue(evt.target.value === '' ? 0 : Number(evt.target.value));
+        };
+        
+        const handleBlur = () => {
+            if (value < 0) {
+                setValue(0);
+            } else if (value > 60) {
+                setValue(60);
+            }
+        };
 
         const finalQuestion = 'How long (in minutes) does it take you to make your way from "' + props.location.name + '" to ' + props.route.fromName + '?';
 
@@ -57,6 +82,13 @@ export default observer (
             setActiveStep(0);
         };
 
+        function addRouteACB(evt) {
+            handleNext();
+            props.updateNewRoute('stationDistance', parseInt(value));
+            props.saveNewRoute();
+            window.location.hash='';
+        }
+
         function stepsContent(index) {
             if (index === 0) {
                 return (
@@ -86,13 +118,80 @@ export default observer (
                         <Grid xs={12}>
                             {props.toStations ? <ButtonGroup fullWidth orientation="vertical" aria-label="vertical button group">{props.toStations.map(stationListACB)}</ButtonGroup> : <Box></Box>}
                         </Grid>
+                        <Grid xs={12}>
+                            <Box sx={{ mb: 2 }}>
+                                <div>
+                                    <Button
+                                        disabled={index === 0}
+                                        onClick={handleBack}
+                                        sx={{ mt: 1, mr: 1 }}
+                                    >
+                                        Back
+                                    </Button>
+                                </div>
+                            </Box>
+                        </Grid>
                     </Grid>
                 );
             }
 
             if (index === 2) {
                 return (
-                    <Box>Hej3</Box>
+                    <Grid container spacing={'40px'} sx={{padding: '40px 0'}} alignItems="center">
+                        <Grid xs={true}>
+                            <Slider
+                                value={typeof value === 'number' ? value : 0}
+                                onChange={handleSliderChange}
+                                aria-labelledby="input-slider"
+                                min={0}
+                                max={20}
+                            />
+                        </Grid>
+                        <Grid xs={'auto'}>
+                            <Grid container>
+                                <Grid xs={true}>
+                                    <Input
+                                        value={value}
+                                        size="small"
+                                        onChange={handleInputChange}
+                                        onBlur={handleBlur}
+                                        inputProps={{
+                                            step: 5,
+                                            min: 0,
+                                            max: 60,
+                                            type: 'number',
+                                            'aria-labelledby': 'input-slider',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid xs={'auto'}>
+                                    <Typography sx={{marginLeft: '10px'}}>
+                                        min
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid xs={12}>
+                            <Box sx={{ mb: 2 }}>
+                                <div>
+                                    <Button
+                                        variant="contained"
+                                        onClick={addRouteACB}
+                                        sx={{ mt: 1, mr: 1 }}
+                                    >
+                                        Add Route
+                                    </Button>
+                                    <Button
+                                        disabled={index === 0}
+                                        onClick={handleBack}
+                                        sx={{ mt: 1, mr: 1 }}
+                                    >
+                                        Back
+                                    </Button>
+                                </div>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 );
             }
         }
@@ -118,6 +217,7 @@ export default observer (
         }
 
         function locationPageACB(evt) {
+            props.resetNewRoute();
             window.location.hash='';
         }
 
@@ -177,24 +277,6 @@ export default observer (
                                         <StepContent>
                                             <Typography>{step.description}</Typography>
                                             {stepsContent(index)}
-                                            {/* <Box sx={{ mb: 2 }}>
-                                                <div>
-                                                    <Button
-                                                        variant="contained"
-                                                        onClick={handleNext}
-                                                        sx={{ mt: 1, mr: 1 }}
-                                                    >
-                                                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                                                    </Button>
-                                                    <Button
-                                                        disabled={index === 0}
-                                                        onClick={handleBack}
-                                                        sx={{ mt: 1, mr: 1 }}
-                                                    >
-                                                        Back
-                                                    </Button>
-                                                </div>
-                                            </Box> */}
                                         </StepContent>
                                     </Step>
                                 ))}

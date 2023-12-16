@@ -16,6 +16,10 @@ export default observer (
             props.model.saveNewRoute();
         }
 
+        function resetNewRouteACB() {
+            props.model.resetNewRoute();
+        }
+
         return (
             <AddRouteView
                 location={props.model.getLocation()}
@@ -25,6 +29,7 @@ export default observer (
                 route={props.model.route}
                 updateNewRoute={updateNewRouteACB}
                 saveNewRoute={saveNewRouteACB}
+                resetNewRoute={resetNewRouteACB}
             />
         );
     }

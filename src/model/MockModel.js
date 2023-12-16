@@ -104,7 +104,16 @@ export default {
             this.route
         ];
         
-        resetNewRoute();
+        this.route = {
+            id: null,
+            fromID: null,
+            fromName: null,
+            toID: null,
+            toName: null,
+            stationDistance: null
+        };
+        this.getFromStationsPromiseState = {};
+        this.getToStationsPromiseState = {};
     },
 
     resetNewRoute() {
@@ -115,6 +124,8 @@ export default {
             toID: null,
             toName: null,
             stationDistance: null
-        }
+        };
+        this.getFromStationsPromiseState = {};
+        this.getToStationsPromiseState = {};
     }
 }
