@@ -20,15 +20,13 @@ import Typography from '@mui/material/Typography';
 
 export default observer (
     function AddRouterView(props) {
-        // let searchStationsStrings = {
-        //     from: '',
-        //     to: '',
-        // };
         let searchStationsString = {
             from: '',
             to: ''
         };
         let stationID = 0;
+
+        const finalQuestion = 'How long (in minutes) does it take you to make your way from "' + props.location.name + '" to ' + props.route.fromName + '?';
 
         const steps = [
             {
@@ -40,8 +38,8 @@ export default observer (
                 description: 'Use the search field to look up the destination which you want to travel to, for example: "Tekniska Högskolan".',
             },
             {
-                label: 'Create an ad',
-                description: `Try out different ad text to see what brings in the most customers, and learn how to enhance your ads using features like ad extensions. If you run into any problems with your ads, find out how to tell if they're running and how to resolve approval issues.`,
+                label: 'Estimate distance to departure location',
+                description: finalQuestion,
             },
         ];
 
@@ -99,10 +97,9 @@ export default observer (
             }
         }
 
-        // function updateNewRouteACB(param, value) {
-        //     props.updateNewRoute(param, value);
-        //     console.log(param + ' -> ' + value);
-        // }
+        function updateNewRouteACB(param, value) {
+            props.updateNewRoute(param, value);
+        }
 
         function searchStationsStringUpdateACB(evt) {
             if (activeStep === 0) {
@@ -126,8 +123,13 @@ export default observer (
 
         function stationListACB(station) {
             function selectStationCB() {
-                console.log(station.SiteId);
-                console.log(station.Name);
+                if (activeStep === 0) {
+                    updateNewRouteACB('fromID', station.SiteId);
+                    updateNewRouteACB('fromName', station.Name);
+                } else if (activeStep === 1) {
+                    updateNewRouteACB('toID', station.SiteId);
+                    updateNewRouteACB('toName', station.Name);
+                }
                 handleNext();
             }
 
@@ -143,16 +145,6 @@ export default observer (
                 </Button>
             );
         }
-
-        // function fromStationListACB(station) {
-        //     const params = ['fromID', 'fromName'];
-        //     stationListACB(params, station);
-        // }
-
-        // function toStationListACB(station) {
-        //     const params = ['toID', 'toName'];
-        //     stationListACB(params, station);
-        // }
 
         return (
             <Grid xs={true}>

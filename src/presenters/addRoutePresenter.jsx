@@ -8,29 +8,23 @@ export default observer (
             props.model.getStations(num, searchString);
         }
 
-        // function getStationsACB(pos, searchString) {
-        //     props.model.getStations(pos, searchString);
-        // }
+        function updateNewRouteACB(param, value) {
+            props.model.updateNewRoute(param, value);
+        }
 
-        // function updateNewRouteACB(param, value) {
-        //     props.model.updateNewRoute(param, value);
-        // }
-
-        // function saveNewRouteACB() {
-        //     props.model.saveNewRoute();
-        // }
+        function saveNewRouteACB() {
+            props.model.saveNewRoute();
+        }
 
         return (
             <AddRouteView
                 location={props.model.getLocation()}
-                // fromStations={props.model.getFromStationsPromiseState.data}
-                // toStations={props.model.getToStationsPromiseState.data}
                 fromStations={props.model.getFromStationsPromiseState.data}
                 toStations={props.model.getToStationsPromiseState.data}
                 getStations={getStationsACB}
-                // route={props.model.route}
-                // updateNewRoute={updateNewRouteACB}
-                // saveNewRoute={saveNewRouteACB}
+                route={props.model.route}
+                updateNewRoute={updateNewRouteACB}
+                saveNewRoute={saveNewRouteACB}
             />
         );
     }
