@@ -25,7 +25,7 @@ export default observer (
                             <Box className='pageHead'>
                                 <Breadcrumbs aria-label='breadcrumb'>
                                     <Typography variant='h4' component='h2'><Chip className='navItem' icon={<PlaceIcon />} onClick={locationPageACB} label={props.location.name} /></Typography>
-                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' label={'ROUTE NAME'} /></Typography>
+                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' label={props.location.routes[props.currentRoute].fromName + " > " + props.location.routes[props.currentRoute].toName} /></Typography>
                                     <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' onDelete={locationPageACB} label='EDIT ROUTE' /></Typography>
                                 </Breadcrumbs>
                             </Box>
@@ -33,7 +33,7 @@ export default observer (
                     </Grid>
                     <Divider />
                     <Grid container spacing={'40px'} sx={{padding: '40px'}}>
-                        TODO
+                        Todo
                     </Grid>
                 </Paper>
             </Grid>

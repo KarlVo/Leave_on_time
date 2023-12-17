@@ -7,6 +7,7 @@ export default observer (
         return (
             <EditRouteView
                 location={props.model.getLocation()}
+                currentRoute={props.model.getRoutePosition()}
             />
         );
     }

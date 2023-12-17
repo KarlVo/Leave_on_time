@@ -82,9 +82,14 @@ export default {
     },
 
     currentLocation: 2,
+    currentRoute: null,
 
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
+
+    setCurrentRoute(routeId) {
+        this.currentRoute = routeId
+    },
 
     addLocation(locationName) {
         const locationID = this.locations.slice(-1)[0].id + 1;
@@ -104,6 +109,12 @@ export default {
 
     getLocation() {
         return this.locations.find(location => location.id === this.currentLocation);
+    },
+
+    getRoutePosition () {
+        const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+        return this.locations[idx].routes.findIndex(route => route.id === this.currentRoute);
+
     },
 
     renameLocation(newLocationName) {
@@ -181,5 +192,18 @@ export default {
         };
         this.getFromStationsPromiseState = {};
         this.getToStationsPromiseState = {};
-    }
+    },
+
+    deleteRoute(locationId, routeId) {
+        console.log("omaromar")
+        // this.locations.forEach(location => {
+        //   if (location.id === locationId) {
+        //     location.routes = location.routes.filter(route => route.id !== routeId);
+        //   }
+        // });
+        const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+        this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== routeId);
+
+      },
+
 }

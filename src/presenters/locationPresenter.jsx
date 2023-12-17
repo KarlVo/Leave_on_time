@@ -16,6 +16,14 @@ export default observer (
             props.model.getRoutes(originId, destId, timeOffset, prms);
         }
 
+        function deleteRouteACB(routeId) {
+            props.model.deleteRoute(props.currentLocation, routeId)
+        }  
+
+        function setCurrentRouteACB(routeId) {
+            props.model.setCurrentRoute(routeId)
+        }
+
         return (
             <LocationView
                 location={props.model.getLocation()}
@@ -23,6 +31,8 @@ export default observer (
                 removeLocation={removeLocationACB}
                 renameLocation={renameLocationACB}
                 getRoutes={getRoutesACB}
+                deleteRoute={deleteRouteACB}
+                setCurrentRoute={setCurrentRouteACB}
             />
         );
     }

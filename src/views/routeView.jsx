@@ -26,7 +26,14 @@ import BoatIcon from '@mui/icons-material/DirectionsBoat';
 export default observer (
     function RouteView(props) {
         function editRouteACB(evt) {
+            props.setCurrentRoute(props.route.id)
             window.location.hash='editroute';
+            
+        }
+
+        function deleteRouteACB(evt) {
+            props.deleteRoute(props.route.id)
+    
         }
 
         function displayLinesCB(line) {
@@ -153,7 +160,7 @@ export default observer (
                                 <IconButton aria-label="settings" onClick={editRouteACB}>
                                     <SettingsIcon />
                                 </IconButton>
-                                <IconButton aria-label="delete">
+                                <IconButton aria-label="delete" onClick={deleteRouteACB}>
                                     <DeleteIcon />
                                 </IconButton>
                             </Grid>
