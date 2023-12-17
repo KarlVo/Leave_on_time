@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react-lite';
+import LineInfo from '/src/model/LineInfo.js';
 
 import React from 'react';
 
@@ -56,16 +57,33 @@ export default observer (
             let timestamp = parseInt(Date.parse(info.Origin.date + 'T' + info.Origin.time + '.000' + Z));
             let timeToLeave = String(Math.floor(((timestamp - Date.now())/1000)/60 - distance));
 
+            let color = 'default';
+
             let transitSymbol;
             if (info.Product.catIn === 'BUS') {
+                if (LineInfo.BlueBus.includes(info.Product.line)) {
+                    color = 'info';
+                } else {
+                    color = 'error';
+                }
                 transitSymbol = <BusIcon />;
             } else if (info.Product.catIn === 'MET') {
+                if (LineInfo.SubwayRedLine.includes(info.Product.line)) {
+                    color = 'error';
+                } else if (LineInfo.SubwayGreenLine.includes(info.Product.line)) {
+                    color = 'success';
+                } else {
+                    color = 'info';
+                }
                 transitSymbol = <SubwayIcon />;
             } else if (info.Product.catIn === 'TRM') {
+                color = 'warning';
                 transitSymbol = <TramIcon />;
             } else if (info.Product.catIn === 'TRN') {
+                color = 'secondary';
                 transitSymbol = <TrainIcon />;
             } else if (info.Product.catIn.includes('FERRY FEY FRY SHIP SHP')) {
+                color = 'primary';
                 transitSymbol = <BoatIcon />;
             } else {
                 transitSymbol = <BusIcon />;
@@ -74,7 +92,7 @@ export default observer (
             return (
                 <Grid container spacing={1} key={info.number}>
                     <Grid xs={1}>{transitSymbol}</Grid>
-                    <Grid xs={2}><Chip color='info' size='small' variant='filled' label={info.Product.line} /></Grid>
+                    <Grid xs={2}><Chip color={color} size='small' variant='filled' label={info.Product.line} /></Grid>
                     <Grid xs={7}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
                     <Grid xs={2}><Typography variant='body2' component='span'>{timeToLeave} min</Typography></Grid>
                 </Grid>
