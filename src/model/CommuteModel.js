@@ -3,28 +3,8 @@ import {searchStations, searchRoutes} from '/src/stationSource.js';
 
 export default {
 
-    // getLocationContentPromiseState.data: [
-    //     {
-    //         id: 1,
-    //         title: "ÖSTRA STATION > ODENPLAN",
-    //         departures: [
-    //             {
-    //                 id: 1,
-    //                 type: 'BUS',
-    //                 line: 4,
-    //                 destination: 'Gullmarsplan',
-    //                 timer: 11
-    //             },
-    //             {
-    //                 ...
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         ...
-    //     },
-    // ],
-
+    // Uncomment the following line before deploying, and remove the prefilled mock-locations.
+    // locations: [{id: 1,name: 'Default Location',routes: []}],
     locations: [
         {
             id: 1,
@@ -49,9 +29,9 @@ export default {
                     id: 2,
                     focused: false,
                     fromID: '9117',
-                    fromName: 'Location 1',
+                    fromName: 'T-Centralen',
                     toID: '9700',
-                    toName: 'Location 2',
+                    toName: 'Odenplan',
                     stationDistance: '11',
                     getRoutesPromiseState: {}
                 },
@@ -59,9 +39,9 @@ export default {
                     id: 3,
                     focused: true,
                     fromID: '1079',
-                    fromName: 'Location 1',
+                    fromName: 'Stockholm City',
                     toID: '9001',
-                    toName: 'Location 2',
+                    toName: 'Gullmarsplan',
                     stationDistance: '11',
                     getRoutesPromiseState: {}
                 },
@@ -69,9 +49,9 @@ export default {
                     id: 4,
                     focused: false,
                     fromID: '9325',
-                    fromName: 'Location 1',
+                    fromName: 'Sundbybergs Station',
                     toID: '3601',
-                    toName: 'Location 2',
+                    toName: 'Bromma Blocks',
                     stationDistance: '11',
                     getRoutesPromiseState: {}
                 }
@@ -102,10 +82,8 @@ export default {
 
     currentLocation: 2,
 
-    // getLocationContentPromiseState: {},
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
-    getRoutesPromiseState: {},
 
     addLocation(locationName) {
         const locationID = this.locations.slice(-1)[0].id + 1;
@@ -140,23 +118,6 @@ export default {
     lastLocation() {
         return this.locations.length < 2;
     },
-
-    // buildLocationContent() {
-    //     let prms = () => {
-    //         let locationContent = [];
-    //         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
-
-    //         this.locations[idx].routes.forEach((route) => {
-    //             resolvePromise(searchRoutes(route.fromID, route.toID, route.stationDistance), this.getRoutesPromiseState);
-    //         });
-    //     }
-        
-    //     let prsms = this.locations[idx].routes.forEach((route) => {
-    //         DoDisturbOff();
-    //     });
-
-    //     resolvePromise(prms, this.getLocationContentPromiseState);
-    // },
 
     getRoutes(originId, destId, timeOffset, prms) {
         resolvePromise(searchRoutes(originId, destId, timeOffset), prms);

@@ -57,33 +57,10 @@ body {
     margin-top: auto;
 }
 
-/*body {
-    background-color: #0050C2;
-}
-
-.flexParent {
-    display: flex;
-    align-items: stretch;
-    gap: 40px;
-    padding: 40px;
-    min-height: calc(100vh - 80px);
-}
-
-.sidebar {
-    flex-basis: 300px;
-}
-
-.mainContent {
-    background-color: #ffffff;
-    flex-grow: 1;
-    border-radius: 32px;
-    padding: 50px;
-}
-
 
 /* Progress Loader */
 
-/*.progressContainer {
+.progressContainer {
     display: flex;
     justify-content: center;
     width: 100%;

@@ -75,86 +75,11 @@ export default observer (
             window.location.hash='addroute';
         }
 
-        function editRouteACB(evt) {
-            window.location.hash='editroute';
-        }
-
         function renderRoutesCB(route) {
-            // let testVar = 1;
-
-            //props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
-            //console.log(route.getRoutesPromiseState);
-            // function renderLinesCB(line) {
-            //     return (
-            //         <Grid key={line.id} container>
-            //             <Grid xs={1}><DirectionsBusIcon /></Grid>
-            //             <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-            //             <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-            //             <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
-            //         </Grid>
-            //     );
-            // }
-
-            // async function testFunc() {
-            //     testVar = 0;
-            //     console.log('Inväntar data...')
-            //     const testresult = await route.getRoutesPromiseState.data;
-            //     console.log('Nu har jag data!')
-            // }
-
-            // if (testVar === 1) { testFunc(); }
-
-            // console.log('hej');
-            //console.log(route.getRoutesPromiseState);
-
-            //function testfunction() {
-            //    await waitForThis.data;
-            //    console.log('done');
-            //}
-
             props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
 
             return (
-                // <Grid key={route.id} xs={4}>
-                //     <Paper elevation={5}>
-                //         <Box className='block'>
-                //             <Typography variant='button' component='h3'>{route.fromName} &gt; {route.toName}</Typography>
-                //         </Box>
-
-                //         <Divider />
-
-                //         <Box className='block'>
-                //             <Grid container spacing={1}>
-                //                 {testfunction()}
-                //             </Grid>
-                //         </Box>
-
-                //         <Divider />
-
-                //         <Box className='block'>
-                //             <Grid container>
-                //                 <Grid xs={true}>
-                //                     <FormGroup>
-                //                         <FormControlLabel size='small' control={<Switch defaultChecked={route.focused} />} label='Focus' />
-                //                     </FormGroup>
-                //                 </Grid>
-                //                 <Grid xs={'auto'}>
-                //                     <IconButton aria-label="settings" onClick={editRouteACB}>
-                //                         <SettingsIcon />
-                //                     </IconButton>
-                //                     <IconButton aria-label="delete">
-                //                         <DeleteIcon />
-                //                     </IconButton>
-                //                 </Grid>
-                //             </Grid>
-                //         </Box>
-
-                //     </Paper>
-                // </Grid>
-                
-
                 <Route key={route.id} route={route} />
-
             );
         }
 

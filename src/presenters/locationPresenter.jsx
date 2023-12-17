@@ -23,7 +23,6 @@ export default observer (
                 removeLocation={removeLocationACB}
                 renameLocation={renameLocationACB}
                 getRoutes={getRoutesACB}
-                routes={props.model.getRoutesPromiseState.data}
             />
         );
     }
