@@ -22,7 +22,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 export default observer (
-    function AddRouterView(props) {
+    function AddRouteView(props) {
         let searchStationsString = {
             from: '',
             to: ''

@@ -12,18 +12,12 @@ export default observer (
             props.model.renameLocation(newLocationName);
         }
 
-        function getRoutesACB(originId, destId, timeOffset, prms) {
-            props.model.getRoutes(originId, destId, timeOffset, prms);
-        }
-
         return (
             <LocationView
                 location={props.model.getLocation()}
                 lastLocation={props.model.lastLocation()}
                 removeLocation={removeLocationACB}
                 renameLocation={renameLocationACB}
-                getRoutes={getRoutesACB}
-                routes={props.model.getRoutesPromiseState.data}
             />
         );
     }

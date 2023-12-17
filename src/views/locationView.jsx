@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react-lite';
+import Route from '/src/presenters/routePresenter';
 
 import React from 'react';
 
@@ -13,18 +14,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import Divider from '@mui/material/Divider';
 import EditIcon from '@mui/icons-material/Edit';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import Grid from '@mui/material/Unstable_Grid2';
-import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import PlaceIcon from '@mui/icons-material/Place';
-import SettingsIcon from '@mui/icons-material/Settings';
 import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
@@ -84,6 +79,85 @@ export default observer (
             window.location.hash='editroute';
         }
 
+        function renderRoutesCB(route) {
+            // let testVar = 1;
+
+            //props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
+            //console.log(route.getRoutesPromiseState);
+            // function renderLinesCB(line) {
+            //     return (
+            //         <Grid key={line.id} container>
+            //             <Grid xs={1}><DirectionsBusIcon /></Grid>
+            //             <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
+            //             <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
+            //             <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
+            //         </Grid>
+            //     );
+            // }
+
+            // async function testFunc() {
+            //     testVar = 0;
+            //     console.log('Inväntar data...')
+            //     const testresult = await route.getRoutesPromiseState.data;
+            //     console.log('Nu har jag data!')
+            // }
+
+            // if (testVar === 1) { testFunc(); }
+
+            // console.log('hej');
+            //console.log(route.getRoutesPromiseState);
+
+            //function testfunction() {
+            //    await waitForThis.data;
+            //    console.log('done');
+            //}
+
+            props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
+
+            return (
+                // <Grid key={route.id} xs={4}>
+                //     <Paper elevation={5}>
+                //         <Box className='block'>
+                //             <Typography variant='button' component='h3'>{route.fromName} &gt; {route.toName}</Typography>
+                //         </Box>
+
+                //         <Divider />
+
+                //         <Box className='block'>
+                //             <Grid container spacing={1}>
+                //                 {testfunction()}
+                //             </Grid>
+                //         </Box>
+
+                //         <Divider />
+
+                //         <Box className='block'>
+                //             <Grid container>
+                //                 <Grid xs={true}>
+                //                     <FormGroup>
+                //                         <FormControlLabel size='small' control={<Switch defaultChecked={route.focused} />} label='Focus' />
+                //                     </FormGroup>
+                //                 </Grid>
+                //                 <Grid xs={'auto'}>
+                //                     <IconButton aria-label="settings" onClick={editRouteACB}>
+                //                         <SettingsIcon />
+                //                     </IconButton>
+                //                     <IconButton aria-label="delete">
+                //                         <DeleteIcon />
+                //                     </IconButton>
+                //                 </Grid>
+                //             </Grid>
+                //         </Box>
+
+                //     </Paper>
+                // </Grid>
+                
+
+                <Route key={route.id} route={route} />
+
+            );
+        }
+
         return (
             <Grid xs={true}>
                 <Paper elevation={3} className='mainContent'>
@@ -106,251 +180,9 @@ export default observer (
                     </Grid>
                     <Divider />
                     <Grid container spacing={'40px'} sx={{padding: '40px'}}>
-                        <Grid xs={4}>
-                            <Paper elevation={5}>
-                                <Box className='block'>
-                                    <Typography variant='button' component='h3'>Östra Station &gt; Odenplan</Typography>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container spacing={1}>
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
 
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='6' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Karolinska institutet</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>4 min</Typography></Grid>
+                        {props.location.routes.length ? props.location.routes.map(renderRoutesCB) : <div></div>}
 
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='error' size='small' variant='filled' label='67' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Odenplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>8 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>15 min</Typography></Grid>
-                                    </Grid>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container>
-                                        <Grid xs={true}>
-                                            <FormGroup>
-                                                <FormControlLabel size='small' control={<Switch defaultChecked />} label='Focus' />
-                                            </FormGroup>
-                                        </Grid>
-                                        <Grid xs={'auto'}>
-                                            <IconButton aria-label="settings" onClick={editRouteACB}>
-                                                <SettingsIcon />
-                                            </IconButton>
-                                            <IconButton aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                        <Grid xs={4}>
-                            <Paper elevation={5}>
-                                <Box className='block'>
-                                    <Typography variant='button' component='h3'>Östra Station &gt; Odenplan</Typography>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container spacing={1}>
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='6' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Karolinska institutet</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>4 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='error' size='small' variant='filled' label='67' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Odenplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>8 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>15 min</Typography></Grid>
-                                    </Grid>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container>
-                                        <Grid xs={true}>
-                                            <FormGroup>
-                                                <FormControlLabel size='small' control={<Switch defaultChecked />} label='Focus' />
-                                            </FormGroup>
-                                        </Grid>
-                                        <Grid xs={'auto'}>
-                                            <IconButton aria-label="settings" onClick={editRouteACB}>
-                                                <SettingsIcon />
-                                            </IconButton>
-                                            <IconButton aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                        <Grid xs={4}>
-                            <Paper elevation={5}>
-                                <Box className='block'>
-                                    <Typography variant='button' component='h3'>Östra Station &gt; Odenplan</Typography>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container spacing={1}>
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='6' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Karolinska institutet</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>4 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='error' size='small' variant='filled' label='67' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Odenplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>8 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>15 min</Typography></Grid>
-                                    </Grid>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container>
-                                        <Grid xs={true}>
-                                            <FormGroup>
-                                                <FormControlLabel size='small' control={<Switch defaultChecked />} label='Focus' />
-                                            </FormGroup>
-                                        </Grid>
-                                        <Grid xs={'auto'}>
-                                            <IconButton aria-label="settings" onClick={editRouteACB}>
-                                                <SettingsIcon />
-                                            </IconButton>
-                                            <IconButton aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                        <Grid xs={4}>
-                            <Paper elevation={5}>
-                                <Box className='block'>
-                                    <Typography variant='button' component='h3'>Östra Station &gt; Odenplan</Typography>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container spacing={1}>
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='6' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Karolinska institutet</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>4 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='error' size='small' variant='filled' label='67' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Odenplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>8 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>15 min</Typography></Grid>
-                                    </Grid>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container>
-                                        <Grid xs={true}>
-                                            <FormGroup>
-                                                <FormControlLabel size='small' control={<Switch defaultChecked />} label='Focus' />
-                                            </FormGroup>
-                                        </Grid>
-                                        <Grid xs={'auto'}>
-                                            <IconButton aria-label="settings" onClick={editRouteACB}>
-                                                <SettingsIcon />
-                                            </IconButton>
-                                            <IconButton aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
-                        <Grid xs={4}>
-                            <Paper elevation={5}>
-                                <Box className='block'>
-                                    <Typography variant='button' component='h3'>Östra Station &gt; Odenplan</Typography>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container spacing={1}>
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>2 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='6' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Karolinska institutet</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>4 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='error' size='small' variant='filled' label='67' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Odenplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>8 min</Typography></Grid>
-
-                                        <Grid xs={1}><DirectionsBusIcon /></Grid>
-                                        <Grid xs={2}><Chip color='info' size='small' variant='filled' label='4' /></Grid>
-                                        <Grid xs={7}><Typography variant='body2' component='span'>Gullmarsplan</Typography></Grid>
-                                        <Grid xs={2}><Typography variant='body2' component='span'>15 min</Typography></Grid>
-                                    </Grid>
-                                </Box>
-                                <Divider />
-                                <Box className='block'>
-                                    <Grid container>
-                                        <Grid xs={true}>
-                                            <FormGroup>
-                                                <FormControlLabel size='small' control={<Switch defaultChecked />} label='Focus' />
-                                            </FormGroup>
-                                        </Grid>
-                                        <Grid xs={'auto'}>
-                                            <IconButton aria-label="settings" onClick={editRouteACB}>
-                                                <SettingsIcon />
-                                            </IconButton>
-                                            <IconButton aria-label="delete">
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
                         <Grid xs={4}>
                             <Paper elevation={0} className='addBlock'>
                                 <Button onClick={addRouteACB} variant='outlined' size='large' startIcon={<AddCircleOutlineIcon />} sx={{backgroundColor: 'aliceblue'}} fullWidth>Add Route</Button>

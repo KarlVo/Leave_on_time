@@ -3,6 +3,28 @@ import {searchStations, searchRoutes} from '/src/stationSource.js';
 
 export default {
 
+    // getLocationContentPromiseState.data: [
+    //     {
+    //         id: 1,
+    //         title: "ÖSTRA STATION > ODENPLAN",
+    //         departures: [
+    //             {
+    //                 id: 1,
+    //                 type: 'BUS',
+    //                 line: 4,
+    //                 destination: 'Gullmarsplan',
+    //                 timer: 11
+    //             },
+    //             {
+    //                 ...
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         ...
+    //     },
+    // ],
+
     locations: [
         {
             id: 1,
@@ -12,7 +34,48 @@ export default {
         {
             id: 2,
             name: 'Home',
-            routes: []
+            routes: [
+                {
+                    id: 1,
+                    focused: false,
+                    fromID: '9600',
+                    fromName: 'Östra Station',
+                    toID: '1079',
+                    toName: 'Odenplan',
+                    stationDistance: '11',
+                    getRoutesPromiseState: {}
+                },
+                {
+                    id: 2,
+                    focused: false,
+                    fromID: '9117',
+                    fromName: 'Location 1',
+                    toID: '9700',
+                    toName: 'Location 2',
+                    stationDistance: '11',
+                    getRoutesPromiseState: {}
+                },
+                {
+                    id: 3,
+                    focused: true,
+                    fromID: '1079',
+                    fromName: 'Location 1',
+                    toID: '9001',
+                    toName: 'Location 2',
+                    stationDistance: '11',
+                    getRoutesPromiseState: {}
+                },
+                {
+                    id: 4,
+                    focused: false,
+                    fromID: '9325',
+                    fromName: 'Location 1',
+                    toID: '3601',
+                    toName: 'Location 2',
+                    stationDistance: '11',
+                    getRoutesPromiseState: {}
+                }
+            ]
         },
         {
             id: 3,
@@ -28,15 +91,18 @@ export default {
 
     route: {
         id: null,
+        focused: false,
         fromID: null,
         fromName: null,
         toID: null,
         toName: null,
-        stationDistance: null
+        stationDistance: null,
+        getRoutesPromiseState: {}
     },
 
     currentLocation: 2,
 
+    // getLocationContentPromiseState: {},
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
     getRoutesPromiseState: {},
@@ -75,8 +141,25 @@ export default {
         return this.locations.length < 2;
     },
 
-    getRoutes(originId, destId) {
-        resolvePromise(searchRoutes(originId, destId), this.getRoutesPromiseState);
+    // buildLocationContent() {
+    //     let prms = () => {
+    //         let locationContent = [];
+    //         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+
+    //         this.locations[idx].routes.forEach((route) => {
+    //             resolvePromise(searchRoutes(route.fromID, route.toID, route.stationDistance), this.getRoutesPromiseState);
+    //         });
+    //     }
+        
+    //     let prsms = this.locations[idx].routes.forEach((route) => {
+    //         DoDisturbOff();
+    //     });
+
+    //     resolvePromise(prms, this.getLocationContentPromiseState);
+    // },
+
+    getRoutes(originId, destId, timeOffset, prms) {
+        resolvePromise(searchRoutes(originId, destId, timeOffset), prms);
     },
 
     getStations(num, searchString) {
@@ -111,11 +194,13 @@ export default {
         
         this.route = {
             id: null,
+            focused: false,
             fromID: null,
             fromName: null,
             toID: null,
             toName: null,
-            stationDistance: null
+            stationDistance: null,
+            getRoutesPromiseState: {}
         };
         this.getFromStationsPromiseState = {};
         this.getToStationsPromiseState = {};
@@ -124,11 +209,13 @@ export default {
     resetNewRoute() {
         this.route = {
             id: null,
+            focused: false,
             fromID: null,
             fromName: null,
             toID: null,
             toName: null,
-            stationDistance: null
+            stationDistance: null,
+            getRoutesPromiseState: {}
         };
         this.getFromStationsPromiseState = {};
         this.getToStationsPromiseState = {};
