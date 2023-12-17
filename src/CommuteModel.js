@@ -1,6 +1,3 @@
-//array with objects
-//struct /object
-
 import { getTimeDetails, getStationID } from "./timetableSource";
 import resolvePromise from "./resolvePromise.js";
 
@@ -58,11 +55,10 @@ export default {
         {name: null, towards: null, line: null, min: null, id: null}
     ],
 
-
-
-
     stationIDPromiseState: {},
     stationDetailsPromiseState: {},
+
+
 
     lastLocation() {
         if (this.locations.length < 2) {
@@ -116,23 +112,20 @@ export default {
 
     // det här är för tiden
     getStationDetails(){
-        console.log("nu kom vi hit");
         const prom = getTimeDetails();
         resolvePromise(prom, this.stationDetailsPromiseState)
-        console.log("svar", this.stationDetailsPromiseState.data);
     },
 
     addStation(stationToAdd){
         this.myStations = [...this.myStations, stationToAdd];
     },
+
     removeStation(stationToRemove){
         console.log("remove Station");
-
-
     },
 
     saveInfo(informationObject){
-        this.setCurrentStation(informationObject.name)
+        this.setCurrentStation(informationObject.name).then
         /*parsa igenom informationen som vi får tillbaka, hitta ID, X och Y location*/
         informationObject.id = this.stationIDPromiseState.data.stationID/* Parsning av ID*/
         informationObject.X = this.stationIDPromiseState.data.stationX/*X värdet*/
