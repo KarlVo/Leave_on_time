@@ -102,12 +102,9 @@ export default {
     setCurrentStation(stationName){
         const oldStation = this.currentStation;
         this.currentStation = stationName;
-        //if(oldStation !==this.currentStation){
-        //stationName = 'Slussen';
         console.log("add Station");
         const prom = getStationID(stationName, true, 1);
         resolvePromise(prom, this.stationIDPromiseState);
-        //}
     },
 
     // det här är för tiden
@@ -125,13 +122,15 @@ export default {
     },
 
     saveInfo(informationObject){
-        this.setCurrentStation(informationObject.name).then
+        this.setCurrentStation(informationObject.name)
         /*parsa igenom informationen som vi får tillbaka, hitta ID, X och Y location*/
+        
+        
         informationObject.id = this.stationIDPromiseState.data.stationID/* Parsning av ID*/
         informationObject.X = this.stationIDPromiseState.data.stationX/*X värdet*/
         informationObject.Y = this.stationIDPromiseState.data.stationY/* Y */
         this.stations.push(informationObject);
-        console.log(this.stations)
+        console.log("omartest", this.stations)
 
     }
 
