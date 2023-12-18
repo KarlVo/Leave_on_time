@@ -16,12 +16,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Skeleton from '@mui/material/Skeleton';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-
 import BusIcon from '@mui/icons-material/DirectionsBus';
 import TramIcon from '@mui/icons-material/Tram';
 import TrainIcon from '@mui/icons-material/Train';
 import SubwayIcon from '@mui/icons-material/Subway';
 import BoatIcon from '@mui/icons-material/DirectionsBoat';
+import WalkIcon from '@mui/icons-material/DirectionsWalk';
 
 export default observer (
     function RouteView(props) {
@@ -65,33 +65,39 @@ export default observer (
             let color = 'default';
 
             let transitSymbol;
-            if (info.Product.catIn === 'BUS') {
-                if (LineInfo.BlueBus.includes(info.Product.line)) {
-                    color = 'info';
+            if (info.Product !== undefined) {
+                if (info.Product.catIn === 'BUS') {
+                    if (LineInfo.BlueBus.includes(info.Product.line)) {
+                        color = 'info';
+                    } else {
+                        color = 'error';
+                    }
+                    transitSymbol = <BusIcon />;
+                } else if (info.Product.catIn === 'MET') {
+                    if (LineInfo.SubwayRedLine.includes(info.Product.line)) {
+                        color = 'error';
+                    } else if (LineInfo.SubwayGreenLine.includes(info.Product.line)) {
+                        color = 'success';
+                    } else {
+                        color = 'info';
+                    }
+                    transitSymbol = <SubwayIcon />;
+                } else if (info.Product.catIn === 'TRM') {
+                    color = 'warning';
+                    transitSymbol = <TramIcon />;
+                } else if (info.Product.catIn === 'TRN') {
+                    color = 'secondary';
+                    transitSymbol = <TrainIcon />;
+                } else if (info.Product.catIn.includes('FERRY FEY FRY SHIP SHP')) {
+                    color = 'primary';
+                    transitSymbol = <BoatIcon />;
                 } else {
-                    color = 'error';
+                    transitSymbol = <BusIcon />;
                 }
-                transitSymbol = <BusIcon />;
-            } else if (info.Product.catIn === 'MET') {
-                if (LineInfo.SubwayRedLine.includes(info.Product.line)) {
-                    color = 'error';
-                } else if (LineInfo.SubwayGreenLine.includes(info.Product.line)) {
-                    color = 'success';
-                } else {
-                    color = 'info';
-                }
-                transitSymbol = <SubwayIcon />;
-            } else if (info.Product.catIn === 'TRM') {
-                color = 'warning';
-                transitSymbol = <TramIcon />;
-            } else if (info.Product.catIn === 'TRN') {
-                color = 'secondary';
-                transitSymbol = <TrainIcon />;
-            } else if (info.Product.catIn.includes('FERRY FEY FRY SHIP SHP')) {
-                color = 'primary';
-                transitSymbol = <BoatIcon />;
             } else {
-                transitSymbol = <BusIcon />;
+                transitSymbol = <WalkIcon />;
+                info.Product = {};
+                info.Product.line = '---';
             }
 
             return (
