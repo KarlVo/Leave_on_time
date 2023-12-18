@@ -25,14 +25,6 @@ import Typography from '@mui/material/Typography';
 
 export default observer (
     function LocationView(props) {
-        React.useEffect(() => {
-            const interval = setInterval(() => {
-                console.log('This function will be called every minute, this will trigger a -1 reduction on all timers.');
-            }, 60000);
-        
-            return () => clearInterval(interval);
-        }, []);
-
         let newLocationName = '';
 
         function newLocationNameACB(evt) {

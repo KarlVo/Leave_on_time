@@ -57,6 +57,12 @@ body {
     margin-top: auto;
 }
 
+.passed {
+    color: #c6c6c6 !important;
+    text-decoration: line-through;
+} .passed .lineChip {
+    background-color: #c6c6c6 !important;
+}
 
 /* Progress Loader */
 

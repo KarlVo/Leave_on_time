@@ -25,6 +25,17 @@ import WalkIcon from '@mui/icons-material/DirectionsWalk';
 
 export default observer (
     function RouteView(props) {
+        const [count, setCount] = React.useState(0);
+        React.useEffect(() => {
+            const incrementCount = () => {
+            setCount(count + 1);
+            };
+            const timer = setTimeout(() => incrementCount(), 60000);
+            return () => clearTimeout(timer);
+        }, [count]);
+
+        const minutesPassed = `${count}`;
+
         function editRouteACB(evt) {
             props.setCurrentRoute(props.route.id);
             window.location.hash='editroute';
@@ -60,7 +71,8 @@ export default observer (
             const Z = plusMinus + hours + ':' + minutes;
 
             let timestamp = parseInt(Date.parse(info.Origin.date + 'T' + info.Origin.time + '.000' + Z));
-            let timeToLeave = String(Math.floor(((timestamp - Date.now())/1000)/60 - distance));
+
+            let timeToLeave = String((Math.floor(((timestamp - Date.now())/1000)/60 - distance)) - parseInt(minutesPassed));
 
             let color = 'default';
 
@@ -101,11 +113,11 @@ export default observer (
             }
 
             return (
-                <Grid container spacing={1} key={info.number}>
+                <Grid container spacing={1} key={info.number} className={parseInt(timeToLeave) < 0 ? 'passed' : 'notPassed'}>
                     <Grid xs={1}>{transitSymbol}</Grid>
-                    <Grid xs={2}><Chip color={color} size='small' variant='filled' label={info.Product.line} /></Grid>
+                    <Grid xs={2}><Chip color={color} className='lineChip' size='small' variant='filled' label={info.Product.line} /></Grid>
                     <Grid xs={7}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
-                    <Grid xs={2}><Typography variant='body2' component='span'>{timeToLeave} min</Typography></Grid>
+                    <Grid xs={2}><Typography variant='body2' component='span'>{parseInt(timeToLeave) < 0 ? '0' : timeToLeave} min</Typography></Grid>
                 </Grid>
             );
         }
