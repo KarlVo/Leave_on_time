@@ -7,9 +7,12 @@ import firebaseConfig from "/src/firebaseConfig.js";
 const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 
+
 const REF= "model";
 const PATH="dinnerModel126";
 const rf= ref(db, PATH);
+
+
 
 //  PATH is the “root” Firebase path. NN is your TW2_TW3 group number
 
@@ -107,23 +110,31 @@ function persistenceToModel(data, model/* TODO */) {
 
 function saveToFirebase(model){
     // TODO
-    if (model.ready === true){
-    set(rf, modelToPersistence(model))
-    //set(rf, modelToPersistence({numberOfGuests:5, currentDish:13, dishes:[{id:13}, {id:42}]}))
+    console.log("saveToFirebase");
+    console.log(model.user);
+    if (model.ready === true && model.user){
+        set(ref(db, PATH+"/"+model.user.uid), modelToPersistence(model));
+        //set(rf, modelToPersistence(model))
+        //set(rf, modelToPersistence({numberOfGuests:5, currentDish:13, dishes:[{id:13}, {id:42}]}))
 }
 
 }
 function readFromFirebase(model){
     // TODO
     model.ready=false;
-    return get(rf)
-              .then(function convertACB(snapshot){
-                     // return promise
-                     return persistenceToModel(snapshot.val(), model); //första parametern är data
-               })
-              .then(function setModelReadyACB(){
-                          model.ready=true;
-              })           
+    if(model.user){
+        //read from "path/"+model.user.uid
+        set(ref(db, PATH+"/"+model.user.uid), modelToPersistence(model));
+        
+        return get(rf)
+                .then(function convertACB(snapshot){
+                        // return promise
+                        return persistenceToModel(snapshot.val(), model); //första parametern är data
+                })
+                .then(function setModelReadyACB(){
+                            model.ready=true;
+                })      
+    }     
 }
 
 

@@ -57,6 +57,9 @@ export default {
 
     stationIDPromiseState: {},
     stationDetailsPromiseState: {},
+    user: null,
+    
+    ready: false,
 
 
 
