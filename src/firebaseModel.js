@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set} from "/src/testFirebase.js";
 import {  } from "./timetableSource";
+import { getTimeDetails } from "./timetableSource";
 // you will find 2 imports already there, add the configuration and instantiate the app and database:
 import firebaseConfig from "/src/firebaseConfig.js";
 const app= initializeApp(firebaseConfig)
@@ -12,7 +13,7 @@ const rf= ref(db, PATH);
 
 //  PATH is the “root” Firebase path. NN is your TW2_TW3 group number
 
-set(ref(db, PATH+"/test"), "dummy");
+//set(ref(db, PATH+"/test"), "dummy");
 
 
 
@@ -72,6 +73,7 @@ function persistenceToModel(data, model/* TODO */) {
         model.currentLocation = data.currentLocationFB;
     }
 
+
     //!locations
     if(!data.currentIDFB){
         model.currentID = 9304;
@@ -81,16 +83,21 @@ function persistenceToModel(data, model/* TODO */) {
     }
     //console.log("testish", data.dishesID)
 
+    if (data.locationsFB) {
+        model.locations = data.locationsFB;
+    } else {
+        model.locations = [];
+    }
     if (data.currentID){
         
-    return getMenuDetails(data.dishesID)
+    return getTimeDetails()
         .then(saveToModelACB)
     }
         // .then(() => getDishDetails(data.currentDishFB))
         // .then(saveToModel2ACB);
 
     function saveToModelACB(param) {
-        model.dishes = param;
+        model.stations = param;
     }
 
     function saveToModel2ACB(param) {
@@ -124,7 +131,7 @@ function readFromFirebase(model){
 
 function connectToFirebase(model, watchFunction) {
     // Read the model from firebase when the app starts
-    if (user)
+    //if (user)
     readFromFirebase(model);
     //! here we need an ACB that is passed to onAuthStateChanged
     // onAuthStateChanged(auth, authACB);
@@ -136,19 +143,19 @@ function connectToFirebase(model, watchFunction) {
     //     }
     // }
 
-    function authACB(user){
-        if(user){
-            console.log("user is signed in");
-        }else{
-            console.log("user is signed out");
-        }
-    }
+    //function authACB(user){
+      //  if(user){
+       //     console.log("user is signed in");
+      //  }else{
+      //      console.log("user is signed out");
+      //  }
+  //  }
     // Save the model to firebase whenever model's numberOfGuests, dishes, or currentDish change
     watchFunction(checkACB, effectACB);
 
     function checkACB() {
         // Return a combination of model properties, e.g., an array
-        return [model.numberOfGuests, model.dishes, model.currentDish];
+        return [model.currentLocation, model.currentID, model.stations];
     }
 
     function effectACB() {
