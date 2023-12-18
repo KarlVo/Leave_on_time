@@ -8,20 +8,20 @@ export default observer (
             props.model.removeLocation(id);
         }
 
-        function renameLocationACB(newLocationName) {
-            props.model.renameLocation(newLocationName);
+        function renameLocationACB(name) {
+            props.model.renameLocation(name);
         }
 
         function getRoutesACB(originId, destId, timeOffset, prms) {
             props.model.getRoutes(originId, destId, timeOffset, prms);
         }
 
-        function deleteRouteACB(routeId) {
-            props.model.deleteRoute(props.currentLocation, routeId)
+        function deleteRouteACB(id) {
+            props.model.deleteRoute(id);
         }  
 
-        function setCurrentRouteACB(routeId) {
-            props.model.setCurrentRoute(routeId)
+        function setCurrentRouteACB(id) {
+            props.model.setCurrentRoute(id)
         }
 
         return (

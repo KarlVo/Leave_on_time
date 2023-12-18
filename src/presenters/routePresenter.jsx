@@ -4,13 +4,12 @@ import RouteView from "/src/views/routeView.jsx";
 
 export default observer (
     function Route(props) {
-
-        function deleteRouteACB(routeId){
-            props.deleteRoute(routeId)
+        function deleteRouteACB(id) {
+            props.deleteRoute(id);
         }
 
-        function setCurrentRouteACB(routeId) {
-            props.setCurrentRoute(routeId)
+        function setCurrentRouteACB(id) {
+            props.setCurrentRoute(id);
         }
 
         return (

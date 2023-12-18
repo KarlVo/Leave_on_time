@@ -26,14 +26,12 @@ import BoatIcon from '@mui/icons-material/DirectionsBoat';
 export default observer (
     function RouteView(props) {
         function editRouteACB(evt) {
-            props.setCurrentRoute(props.route.id)
+            props.setCurrentRoute(props.route.id);
             window.location.hash='editroute';
-            
         }
 
         function deleteRouteACB(evt) {
-            props.deleteRoute(props.route.id)
-    
+            props.deleteRoute(props.route.id);
         }
 
         function displayLinesCB(line) {

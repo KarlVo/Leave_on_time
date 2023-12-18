@@ -87,22 +87,6 @@ export default {
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
 
-    setCurrentRoute(routeId) {
-        this.currentRoute = routeId
-    },
-
-    addLocation(locationName) {
-        const locationID = this.locations.slice(-1)[0].id + 1;
-        this.locations = [
-            ...this.locations,
-            {
-                id: locationID,
-                name: locationName,
-                routes: []
-            }
-        ];
-    },
-
     setLocation(id) {
         this.currentLocation = id;
     },
@@ -111,15 +95,21 @@ export default {
         return this.locations.find(location => location.id === this.currentLocation);
     },
 
-    getRoutePosition () {
+    renameLocation(name) {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
-        return this.locations[idx].routes.findIndex(route => route.id === this.currentRoute);
-
+        this.locations[idx].name = name;
     },
 
-    renameLocation(newLocationName) {
-        const idx = this.locations.findIndex(location => location.id === this.currentLocation);
-        this.locations[idx].name = newLocationName;
+    addLocation(name) {
+        const locationID = this.locations.slice(-1)[0].id + 1;
+        this.locations = [
+            ...this.locations,
+            {
+                id: locationID,
+                name: name,
+                routes: []
+            }
+        ];
     },
 
     removeLocation(id) {
@@ -131,16 +121,25 @@ export default {
         return this.locations.length < 2;
     },
 
-    getRoutes(originId, destId, timeOffset, prms) {
-        resolvePromise(searchRoutes(originId, destId, timeOffset), prms);
-    },
-
     getStations(num, searchString) {
         if (num === 0) {
             resolvePromise(searchStations(searchString), this.getFromStationsPromiseState);
         } else if (num === 1) {
             resolvePromise(searchStations(searchString), this.getToStationsPromiseState);
         }
+    },
+
+    getRoutes(originId, destId, timeOffset, prms) {
+        resolvePromise(searchRoutes(originId, destId, timeOffset), prms);
+    },
+
+    getRoutePosition () {
+        const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+        return this.locations[idx].routes.findIndex(route => route.id === this.currentRoute);
+    },
+
+    setCurrentRoute(id) {
+        this.currentRoute = id;
     },
     
     updateNewRoute(param, value) {
@@ -194,16 +193,8 @@ export default {
         this.getToStationsPromiseState = {};
     },
 
-    deleteRoute(locationId, routeId) {
-        console.log("omaromar")
-        // this.locations.forEach(location => {
-        //   if (location.id === locationId) {
-        //     location.routes = location.routes.filter(route => route.id !== routeId);
-        //   }
-        // });
+    deleteRoute(id) {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
-        this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== routeId);
-
-      },
-
+        this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== id);
+    }
 }

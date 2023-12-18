@@ -75,20 +75,17 @@ export default observer (
             window.location.hash='addroute';
         }
 
-        function deleteRouteACB(routeId) {
-            props.deleteRoute(routeId)
-        }  
+        function deleteRouteACB(id) {
+            props.deleteRoute(id);
+        }
 
-        function setCurrentRouteACB(routeId) {
-            props.setCurrentRoute(routeId)
-        }  
+        function setCurrentRouteACB(id) {
+            props.setCurrentRoute(id);
+        }
 
         function renderRoutesCB(route) {
             props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
-
             
-                  
-            console.log(props.model)
             return (
                 <Route key={route.id} route={route} locationId={props.location.id} deleteRoute={deleteRouteACB} setCurrentRoute={setCurrentRouteACB} />
             );

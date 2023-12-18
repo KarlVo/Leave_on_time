@@ -25,7 +25,7 @@ export default observer (
                             <Box className='pageHead'>
                                 <Breadcrumbs aria-label='breadcrumb'>
                                     <Typography variant='h4' component='h2'><Chip className='navItem' icon={<PlaceIcon />} onClick={locationPageACB} label={props.location.name} /></Typography>
-                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' label={props.location.routes[props.currentRoute].fromName + " > " + props.location.routes[props.currentRoute].toName} /></Typography>
+                                    <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' label={props.location.routes[props.currentRoute].fromName + ' > ' + props.location.routes[props.currentRoute].toName} /></Typography>
                                     <Typography variant='h4' component='h2'><Chip className='navItem' variant='outlined' onDelete={locationPageACB} label='EDIT ROUTE' /></Typography>
                                 </Breadcrumbs>
                             </Box>
