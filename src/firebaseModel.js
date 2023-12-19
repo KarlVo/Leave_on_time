@@ -1,121 +1,45 @@
-import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
-
+import {getAuth} from 'firebase/auth';
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set} from "/src/testFirebase.js";
-import {  } from "./timetableSource";
-import { getTimeDetails } from "./timetableSource";
-// you will find 2 imports already there, add the configuration and instantiate the app and database:
+
 import firebaseConfig from "/src/firebaseConfig.js";
-const app= initializeApp(firebaseConfig)
-const db= getDatabase(app)
 
-import model from '/src/CommuteModel.js';
+const app= initializeApp(firebaseConfig);
+const db= getDatabase(app);
 
-//set(ref(db, "/test/" + model.user.uid), "dummy");
-
-
-
-const REF= "model";
-//const PATH= model.user.uid;
-//console.log("testavfb", model.user)
-//const PATH="dinnerModel126"
-//const rf= ref(db, PATH);
-
-
-
-function observerRecap(/*TODO*/) {
-    //TODO
-}
-
-function modelToPersistence(model/* TODO */){
-    // TODO return an object
+function modelToPersistence(model){
     return {
-        currentLocationFB: model.currentLocation, //det här ÄR redan id
+        currentLocationFB: model.currentLocation,
         locationsFB: model.locations,
-        //dishesID:    model.dishes.map(dish => dish.id).sort((a, b) => a - b) //här vill jag endast ha id av dish arrayen och sen sorterar jag de
-        addingLocationFB: model.addingLocation,
-
-        commuteStationsFB: model.commuteStations,
-        commuteDistancesFB: model.commuteDistances,
-        intrestedLinesFB: model.intrestedLines,
-
-        currentIDFB: model.currentID,
-        currentStationFB: model.currentStation,
-        stationsFB: model.stations,
-        myStationsFB: model.myStations,
-
     };
 }
 
-function persistenceToModel(data, model/* TODO */) {
-    // TODO return a promise
-
+function persistenceToModel(data, model) {
     // Check if data is falsy or empty
     if (!data) {
-
-        model.currentLocation = null; //9304
-        model.locations = [];
-        model.addingLocation = false;
-        model.commuteStations = [];
-        model.commuteDistances = [];
-        model.intrestedLines = [];
-        model.currentID = null;
-        model.currentStation = null;
-        model.stations = [];
-        model.myStations = [];
-        return Promise.resolve(); // Return a resolved promise for an empty database
+        model.currentLocation = 1;
+        return Promise.resolve();
     }
 
     //!currentLocation
     if (data.currentLocationFB === null || data.currentLocationFB === undefined) {
-        model.currentLocation = null;
+        model.currentLocation = 1;
     } else {
         model.currentLocation = data.currentLocationFB;
     }
 
-
     //!locations
-    if(!data.currentIDFB){
-        model.currentID = 9304;
-    }
-    else{
-    model.currentID = data.currentIDFB;
-    }
-    //console.log("testish", data.dishesID)
-
     if (data.locationsFB) {
         model.locations = data.locationsFB;
-    } else {
-        model.locations = [];
-    }
-    if (data.currentID){
-        
-    return getTimeDetails()
-        .then(saveToModelACB)
-    }
-        // .then(() => getDishDetails(data.currentDishFB))
-        // .then(saveToModel2ACB);
-
-    function saveToModelACB(param) {
-        model.stations = param;
-    }
-
-    function saveToModel2ACB(param) {
-        model.currentDish = param;
     }
 }
 
 function saveToFirebase(model){
-    // TODO
     console.log("saveToFirebase");
-    //console.log("veryspecific", model.user);
-    //set(ref(db, "/"+model.user.uid), modelToPersistence(model));
 
     if (model.ready === true && model.user){
-        set(ref(db, "/"+model.user.uid), modelToPersistence(model));
-        //set(rf, modelToPersistence(model))
-        //set(rf, modelToPersistence({numberOfGuests:5, currentDish:13, dishes:[{id:13}, {id:42}]}))
-}
+        set(ref(db, '/'+model.user.uid), modelToPersistence(model));
+    }
 
 }
 function readFromFirebase(model){
@@ -127,12 +51,12 @@ function readFromFirebase(model){
         
         return get(ref(db, model.user.uid))
                 .then(function convertACB(snapshot){
-                        // return promise
-                        return persistenceToModel(snapshot.val(), model); //första parametern är data
+                // return promise
+                    return persistenceToModel(snapshot.val(), model); //första parametern är data
                 })
                 .then(function setModelReadyACB(){
-                            model.ready=true;
-                })      
+                    model.ready=true;
+        })      
     }     
 }
 
@@ -141,8 +65,7 @@ function readFromFirebase(model){
 
 function connectToFirebase(model, watchFunction) {
     // Read the model from firebase when the app starts
-    const vs = getAuth()
-    console.log("testavfb", model.user)
+    console.log("testavfb", model.user);
     //const PATH= model.user.uid;
     //const PATH= "8dFN1eLoE8eovVPNvNxdQ7DV6U93"
     //const rf= ref(db, PATH);
@@ -171,7 +94,7 @@ function connectToFirebase(model, watchFunction) {
 
     function checkACB() {
         // Return a combination of model properties, e.g., an array
-        return [model.currentLocation, model.currentID, model.stations,];
+        return [model.locations, model.currentLocation];
     }
 
     function effectACB() {

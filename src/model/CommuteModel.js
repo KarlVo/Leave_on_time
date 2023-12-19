@@ -5,70 +5,70 @@ export default {
 
     // Uncomment the following line before deploying, and remove the prefilled mock-locations.
     // Also change line 84: currentLocation: 2, => currentLocation: 1,
-    // locations: [{id: 1,name: 'Default Location',routes: []}],
-    locations: [
-        {
-            id: 1,
-            name: 'School',
-            routes: []
-        },
-        {
-            id: 2,
-            name: 'Home',
-            routes: [
-                {
-                    id: 1,
-                    focused: false,
-                    fromID: '9600',
-                    fromName: 'Östra Station',
-                    toID: '1079',
-                    toName: 'Odenplan',
-                    stationDistance: '11',
-                    getRoutesPromiseState: {}
-                },
-                {
-                    id: 2,
-                    focused: false,
-                    fromID: '9117',
-                    fromName: 'T-Centralen',
-                    toID: '9700',
-                    toName: 'Odenplan',
-                    stationDistance: '11',
-                    getRoutesPromiseState: {}
-                },
-                {
-                    id: 3,
-                    focused: true,
-                    fromID: '1079',
-                    fromName: 'Stockholm City',
-                    toID: '9001',
-                    toName: 'Gullmarsplan',
-                    stationDistance: '11',
-                    getRoutesPromiseState: {}
-                },
-                {
-                    id: 4,
-                    focused: false,
-                    fromID: '9325',
-                    fromName: 'Sundbybergs Station',
-                    toID: '3601',
-                    toName: 'Bromma Blocks',
-                    stationDistance: '11',
-                    getRoutesPromiseState: {}
-                }
-            ]
-        },
-        {
-            id: 3,
-            name: 'Work',
-            routes: []
-        },
-        {
-            id: 4,
-            name: 'Parrents',
-            routes: []
-        }
-    ],
+    locations: [{id: 1,name: 'Default Location',routes: []}],
+    // locations: [
+    //     {
+    //         id: 1,
+    //         name: 'School',
+    //         routes: []
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Home',
+    //         routes: [
+    //             {
+    //                 id: 1,
+    //                 focused: false,
+    //                 fromID: '9600',
+    //                 fromName: 'Östra Station',
+    //                 toID: '1079',
+    //                 toName: 'Odenplan',
+    //                 stationDistance: '11',
+    //                 getRoutesPromiseState: {}
+    //             },
+    //             {
+    //                 id: 2,
+    //                 focused: false,
+    //                 fromID: '9117',
+    //                 fromName: 'T-Centralen',
+    //                 toID: '9700',
+    //                 toName: 'Odenplan',
+    //                 stationDistance: '11',
+    //                 getRoutesPromiseState: {}
+    //             },
+    //             {
+    //                 id: 3,
+    //                 focused: true,
+    //                 fromID: '1079',
+    //                 fromName: 'Stockholm City',
+    //                 toID: '9001',
+    //                 toName: 'Gullmarsplan',
+    //                 stationDistance: '11',
+    //                 getRoutesPromiseState: {}
+    //             },
+    //             {
+    //                 id: 4,
+    //                 focused: false,
+    //                 fromID: '9325',
+    //                 fromName: 'Sundbybergs Station',
+    //                 toID: '3601',
+    //                 toName: 'Bromma Blocks',
+    //                 stationDistance: '11',
+    //                 getRoutesPromiseState: {}
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Work',
+    //         routes: []
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Parrents',
+    //         routes: []
+    //     }
+    // ],
 
     route: {
         id: null,
@@ -81,7 +81,7 @@ export default {
         getRoutesPromiseState: {}
     },
 
-    currentLocation: 2,
+    currentLocation: 1,
     currentRoute: null,
 
     getFromStationsPromiseState: {},
