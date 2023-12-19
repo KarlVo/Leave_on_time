@@ -39,7 +39,6 @@ function loginOrOutACB(user) {
     } else {
         // If user is falsy, wipe user data
         reactiveModel.user = null;
-        reactiveModel.dishes = []; // Assuming dishes is an array property in your model
     }
 }
 

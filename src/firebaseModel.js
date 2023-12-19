@@ -30,6 +30,11 @@ function persistenceToModel(data, model) {
 
     //!locations
     if (data.locationsFB) {
+        data.locationsFB.forEach((location) => {
+            if (!location.routes) {
+                location.routes = [];
+            }
+        });
         model.locations = data.locationsFB;
     }
 }
