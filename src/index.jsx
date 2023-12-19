@@ -22,11 +22,40 @@ document.getElementById("authButton").addEventListener("click", function clickAC
 
 });
 
+// onAuthStateChanged(auth, loginOrOutACB);
+//     //demo render
+//     function loginOrOutACB(user){
+//         appDiv.innerHTML="user "+(user?" ID "+user.uid:user);
+        
+//         if (user) {
+//             model.user = user;
+//             console.log("user is: ",model.user )
+//             model.ready = false;
+//             connectToFirebase(reactiveModel, reaction);
+//         }
+//     }
+
+const reactiveModel = observable(model);
+
+
 onAuthStateChanged(auth, loginOrOutACB);
-    //demo render
-    function loginOrOutACB(user){
-        appDiv.innerHTML="user "+(user?" ID "+user.uid:user);
+
+function loginOrOutACB(user) {
+    appDiv.innerHTML = "user " + (user ? " ID " + user.uid : user);
+
+    if (user) {
+        reactiveModel.user = user;
+        console.log("user is: ", model.user);
+        reactiveModel.ready = false;
+
+        // Connect to Firebase only if the user is truthy
+        connectToFirebase(reactiveModel, reaction);
+    } else {
+        // If user is falsy, wipe user data
+        reactiveModel.user = null;
+        reactiveModel.dishes = []; // Assuming dishes is an array property in your model
     }
+}
    
 
 
@@ -46,8 +75,7 @@ if(auth.currentUser){
     
 }
 
-const reactiveModel = observable(model);
 window.myModel= reactiveModel; // For debugging
 
 createRoot(document.getElementById('root')).render(<ReactRoot model={reactiveModel}/>);
-connectToFirebase(reactiveModel, reaction);
+//connectToFirebase(reactiveModel, reaction);

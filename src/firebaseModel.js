@@ -1,3 +1,5 @@
+import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set} from "/src/testFirebase.js";
 import {  } from "./timetableSource";
@@ -7,24 +9,19 @@ import firebaseConfig from "/src/firebaseConfig.js";
 const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 
+import model from '/src/CommuteModel.js';
+
+//set(ref(db, "/test/" + model.user.uid), "dummy");
+
+
 
 const REF= "model";
-const PATH="dinnerModel126";
-const rf= ref(db, PATH);
+//const PATH= model.user.uid;
+//console.log("testavfb", model.user)
+//const PATH="dinnerModel126"
+//const rf= ref(db, PATH);
 
 
-
-//  PATH is the “root” Firebase path. NN is your TW2_TW3 group number
-
-//set(ref(db, PATH+"/test"), "dummy");
-
-
-
-// Add relevant imports here 
-// TODO
-
-// Initialise firebase app, database, ref
-// TODO
 
 function observerRecap(/*TODO*/) {
     //TODO
@@ -111,9 +108,11 @@ function persistenceToModel(data, model/* TODO */) {
 function saveToFirebase(model){
     // TODO
     console.log("saveToFirebase");
-    console.log(model.user);
+    //console.log("veryspecific", model.user);
+    //set(ref(db, "/"+model.user.uid), modelToPersistence(model));
+
     if (model.ready === true && model.user){
-        set(ref(db, PATH+"/"+model.user.uid), modelToPersistence(model));
+        set(ref(db, "/"+model.user.uid), modelToPersistence(model));
         //set(rf, modelToPersistence(model))
         //set(rf, modelToPersistence({numberOfGuests:5, currentDish:13, dishes:[{id:13}, {id:42}]}))
 }
@@ -124,9 +123,9 @@ function readFromFirebase(model){
     model.ready=false;
     if(model.user){
         //read from "path/"+model.user.uid
-        set(ref(db, PATH+"/"+model.user.uid), modelToPersistence(model));
+        //set(ref(db, +"/"+model.user.uid), modelToPersistence(model));
         
-        return get(rf)
+        return get(ref(db, model.user.uid))
                 .then(function convertACB(snapshot){
                         // return promise
                         return persistenceToModel(snapshot.val(), model); //första parametern är data
@@ -142,7 +141,13 @@ function readFromFirebase(model){
 
 function connectToFirebase(model, watchFunction) {
     // Read the model from firebase when the app starts
-    //if (user)
+    const vs = getAuth()
+    console.log("testavfb", model.user)
+    //const PATH= model.user.uid;
+    //const PATH= "8dFN1eLoE8eovVPNvNxdQ7DV6U93"
+    //const rf= ref(db, PATH);
+
+
     readFromFirebase(model);
     //! here we need an ACB that is passed to onAuthStateChanged
     // onAuthStateChanged(auth, authACB);
@@ -166,7 +171,7 @@ function connectToFirebase(model, watchFunction) {
 
     function checkACB() {
         // Return a combination of model properties, e.g., an array
-        return [model.currentLocation, model.currentID, model.stations];
+        return [model.currentLocation, model.currentID, model.stations,];
     }
 
     function effectACB() {
