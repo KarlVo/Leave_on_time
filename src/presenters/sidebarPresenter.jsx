@@ -18,6 +18,7 @@ export default observer (
                 currentLocation={props.model.currentLocation}
                 addLocation={addLocationACB}
                 setLocation={setLocationACB}
+                user={props.model.user}
             />
         );
     }

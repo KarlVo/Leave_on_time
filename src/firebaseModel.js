@@ -1,6 +1,7 @@
-import {getAuth} from 'firebase/auth';
+//import {getAuth} from 'firebase/auth';
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set} from "/src/testFirebase.js";
+import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
 
 import firebaseConfig from "/src/firebaseConfig.js";
 
@@ -68,33 +69,35 @@ function readFromFirebase(model){
 
 
 
-function connectToFirebase(model, watchFunction) {
+function connectToFirebase(model, watchFunction, auth) {
     // Read the model from firebase when the app starts
     console.log("testavfb", model.user);
     //const PATH= model.user.uid;
     //const PATH= "8dFN1eLoE8eovVPNvNxdQ7DV6U93"
     //const rf= ref(db, PATH);
+    onAuthStateChanged(auth, loginOrOutACB);
+    
+    function loginOrOutACB(user) {
+        //document.getElementById('app').innerHTML = "user " + (user ? " ID " + user.uid : user);
+
+    
+        if (user) {
+                model.user = user;
+                console.log("user is: ", model.user);
+                model.ready = false;
+                readFromFirebase(model);
+            // Connect to Firebase only if the user is truthy
+        } else {
+            // If user is falsy, wipe user data
+            model.user = null;
+        }
+    }
 
 
-    readFromFirebase(model);
+    //readFromFirebase(model);
     //! here we need an ACB that is passed to onAuthStateChanged
     // onAuthStateChanged(auth, authACB);
     // function authACB(user){
-    //     if(user){
-    //         console.log("user is signed in");
-    //     }else{
-    //         console.log("user is signed out");
-    //     }
-    // }
-
-    //function authACB(user){
-      //  if(user){
-       //     console.log("user is signed in");
-      //  }else{
-      //      console.log("user is signed out");
-      //  }
-  //  }
-    // Save the model to firebase whenever model's numberOfGuests, dishes, or currentDish change
     watchFunction(checkACB, effectACB);
 
     function checkACB() {
@@ -107,6 +110,7 @@ function connectToFirebase(model, watchFunction) {
         saveToFirebase(model);
     }
 }
+
 
 
 

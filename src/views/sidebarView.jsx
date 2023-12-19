@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react-lite';
+import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
 
 import React from 'react';
 
@@ -16,6 +17,11 @@ import Typography from '@mui/material/Typography';
 
 export default observer (
     function SidebarView(props) {
+
+        function loginACB() {
+            document.getElementById('auth').click();
+        }
+
         let locationName = '';
 
         const [addLocationForm, setAddLocationFormOpen] = React.useState(false);
@@ -66,6 +72,9 @@ export default observer (
                         <Typography variant='h1' component='h1' sx={{marginBottom: '40px', width: '300px', height: '100px'}}>
                             <img src='/src/img/logo.png' alt='Leave on Time' width='300px' height='100px' />
                         </Typography>
+                        <Button onClick={loginACB}>
+                            {props.user ? 'Log out' : 'Log in'}
+                        </Button>
                         <ButtonGroup orientation='vertical' aria-label='vertical contained button group' variant='contained' sx={{width: '100%', margin: 0, padding: 0}}>
                             {props.locations.map(locationButtonsCB)}
                         </ButtonGroup>
