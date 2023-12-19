@@ -104,11 +104,11 @@ export default observer (
                         </Grid>
                     </Grid>
                     <Divider />
-                    <Grid container spacing={'40px'} sx={{padding: '40px'}}>
+                    <Grid container spacing={'40px'} sx={{padding: '40px'}} sm={{spacing: '0', padding: '0'}}>
 
                         {props.location.routes.length ? props.location.routes.map(renderRoutesCB) : <div></div>}
 
-                        <Grid xs={4}>
+                        <Grid xs={12} lg={6} xl={4}>
                             <Paper elevation={0} className='addBlock'>
                                 <Button onClick={addRouteACB} variant='outlined' size='large' startIcon={<AddCircleOutlineIcon />} sx={{backgroundColor: 'aliceblue'}} fullWidth>Add Route</Button>
                             </Paper>

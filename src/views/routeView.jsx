@@ -77,7 +77,7 @@ export default observer (
             let color = 'default';
 
             let transitSymbol;
-            if (info.Product !== undefined) {
+            if (info.Product?.line) {
                 if (info.Product.catIn === 'BUS') {
                     if (LineInfo.BlueBus.includes(info.Product.line)) {
                         color = 'info';
@@ -116,8 +116,8 @@ export default observer (
                 <Grid container spacing={1} key={info.number} className={parseInt(timeToLeave) < 0 ? 'passed' : 'notPassed'}>
                     <Grid xs={1}>{transitSymbol}</Grid>
                     <Grid xs={2}><Chip color={color} className='lineChip' size='small' variant='filled' label={info.Product.line} /></Grid>
-                    <Grid xs={7}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
-                    <Grid xs={2}><Typography variant='body2' component='span'>{parseInt(timeToLeave) < 0 ? '0' : timeToLeave} min</Typography></Grid>
+                    <Grid xs={6}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
+                    <Grid xs={3}><Typography variant='body2' component='span'>{parseInt(timeToLeave) < 0 ? '0' : timeToLeave} min</Typography></Grid>
                 </Grid>
             );
         }
@@ -129,29 +129,29 @@ export default observer (
                 <Grid container spacing={1}>
                     <Grid xs={1}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
                     <Grid xs={2}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
-                    <Grid xs={7}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
-                    <Grid xs={2}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={6}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={3}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
 
                     <Grid xs={1}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
                     <Grid xs={2}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
-                    <Grid xs={7}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
-                    <Grid xs={2}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={6}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={3}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
 
                     <Grid xs={1}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
                     <Grid xs={2}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
-                    <Grid xs={7}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
-                    <Grid xs={2}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={6}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={3}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
 
                     <Grid xs={1}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
                     <Grid xs={2}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
-                    <Grid xs={7}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
-                    <Grid xs={2}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={6}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={3}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
                 </Grid>
             );
         }
 
         return (
-            <Grid xs={4}>
+            <Grid xs={12} lg={6} xl={4}>
                 <Paper elevation={5}>
                     <Box className='block'>
                         <Typography variant='button' component='h3'>{props.route.fromName} &gt; {props.route.toName}</Typography>
