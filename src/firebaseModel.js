@@ -15,13 +15,13 @@ export default function connectToFirebase(model) {
     document.getElementById('auth').addEventListener('click', () => {
         if (auth.currentUser) {
             signOut(auth).then(() => {
-                window.location.reload(false);
                 window.location.hash='';
+                window.location.reload(false);
             });
         } else {
             signInWithPopup(auth, provider).then(() => {
-                window.location.reload(false);
                 window.location.hash='';
+                window.location.reload(false);
             });
         }
     });

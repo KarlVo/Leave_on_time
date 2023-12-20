@@ -27,8 +27,7 @@ export default {
     //                 fromName: 'Östra Station',
     //                 toID: '1079',
     //                 toName: 'Odenplan',
-    //                 stationDistance: '11',
-    //                 getRoutesPromiseState: {}
+    //                 stationDistance: '11'
     //             },
     //             {
     //                 id: 2,
@@ -37,8 +36,7 @@ export default {
     //                 fromName: 'T-Centralen',
     //                 toID: '9700',
     //                 toName: 'Odenplan',
-    //                 stationDistance: '11',
-    //                 getRoutesPromiseState: {}
+    //                 stationDistance: '11'
     //             },
     //             {
     //                 id: 3,
@@ -47,8 +45,7 @@ export default {
     //                 fromName: 'Stockholm City',
     //                 toID: '9001',
     //                 toName: 'Gullmarsplan',
-    //                 stationDistance: '11',
-    //                 getRoutesPromiseState: {}
+    //                 stationDistance: '11'
     //             },
     //             {
     //                 id: 4,
@@ -57,8 +54,7 @@ export default {
     //                 fromName: 'Sundbybergs Station',
     //                 toID: '3601',
     //                 toName: 'Bromma Blocks',
-    //                 stationDistance: '11',
-    //                 getRoutesPromiseState: {}
+    //                 stationDistance: '11'
     //             }
     //         ]
     //     },
@@ -81,15 +77,24 @@ export default {
         fromName: null,
         toID: null,
         toName: null,
-        stationDistance: null,
-        getRoutesPromiseState: {}
+        stationDistance: null
     },
 
     currentLocation: 1,
     currentRoute: null,
 
+    getRoutesPromiseStates: {},
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
+
+    setRoutesPromiseState(locationID, routeID) {
+        if (!this.getRoutesPromiseStates[locationID]) {
+            this.getRoutesPromiseStates[locationID] = {};
+            this.getRoutesPromiseStates[locationID][routeID] = {};
+        } else if (!this.getRoutesPromiseStates[locationID][routeID]) {
+            this.getRoutesPromiseStates[locationID][routeID] = {};
+        }
+    },
 
     setLocation(id) {
         this.currentLocation = id;
@@ -175,8 +180,7 @@ export default {
             fromName: null,
             toID: null,
             toName: null,
-            stationDistance: null,
-            getRoutesPromiseState: {}
+            stationDistance: null
         };
         this.getFromStationsPromiseState = {};
         this.getToStationsPromiseState = {};
@@ -190,8 +194,7 @@ export default {
             fromName: null,
             toID: null,
             toName: null,
-            stationDistance: null,
-            getRoutesPromiseState: {}
+            stationDistance: null
         };
         this.getFromStationsPromiseState = {};
         this.getToStationsPromiseState = {};

@@ -24,6 +24,10 @@ export default observer (
             props.model.setCurrentRoute(id)
         }
 
+        function setRoutesPromiseStateACB(locationID, routeID) {
+            props.model.setRoutesPromiseState(locationID, routeID);
+        }
+
         return (
             <LocationView
                 location={props.model.getLocation()}
@@ -33,6 +37,8 @@ export default observer (
                 getRoutes={getRoutesACB}
                 deleteRoute={deleteRouteACB}
                 setCurrentRoute={setCurrentRouteACB}
+                setRoutesPromiseState={setRoutesPromiseStateACB}
+                getRoutesPromiseStates={props.model.getRoutesPromiseStates}
             />
         );
     }

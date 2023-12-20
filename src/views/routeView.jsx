@@ -160,7 +160,7 @@ export default observer (
                     <Divider />
 
                     <Box className='block'>
-                        {props.route.getRoutesPromiseState.data ? props.route.getRoutesPromiseState.data.Trip.slice(0, 4).map(displayLinesCB) : renderPlaceHolder()}
+                        {props.getRoutesPromiseState.data ? props.getRoutesPromiseState.data.Trip.slice(0, 4).map(displayLinesCB) : renderPlaceHolder()}
                     </Box>
 
                     <Divider />

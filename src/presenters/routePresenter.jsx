@@ -17,6 +17,7 @@ export default observer (
                 route={props.route}
                 deleteRoute={deleteRouteACB}
                 setCurrentRoute={setCurrentRouteACB}
+                getRoutesPromiseState={props.getRoutesPromiseState}
             />
         );
     }

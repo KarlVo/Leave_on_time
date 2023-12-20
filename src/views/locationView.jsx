@@ -76,10 +76,11 @@ export default observer (
         }
 
         function renderRoutesCB(route) {
-            props.getRoutes(route.fromID, route.toID, route.stationDistance, route.getRoutesPromiseState);
+            props.setRoutesPromiseState(props.location.id, route.id);
+            props.getRoutes(route.fromID, route.toID, route.stationDistance, props.getRoutesPromiseStates[props.location.id][route.id]);
             
             return (
-                <Route key={route.id} route={route} locationId={props.location.id} deleteRoute={deleteRouteACB} setCurrentRoute={setCurrentRouteACB} />
+                <Route key={route.id} route={route} locationId={props.location.id} deleteRoute={deleteRouteACB} setCurrentRoute={setCurrentRouteACB} getRoutesPromiseState={props.getRoutesPromiseStates[props.location.id][route.id]} />
             );
         }
 
