@@ -144,6 +144,11 @@ export default {
     deleteRoute(id) {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
         this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== id);
-    }
+    },
+
+    editRouteTime(newTime){
+        this.getLocation().routes[this.currentRoute-1].stationDistance = newTime
+
+    },
 
 }
