@@ -72,7 +72,7 @@ export default observer (
                         <Typography variant='h1' component='h1' sx={{marginBottom: '40px', width: '300px', height: '100px'}}>
                             <img src='/src/img/logo.png' alt='Leave on Time' width='300px' height='100px' />
                         </Typography>
-                        <Button onClick={loginACB}>
+                        <Button onClick={loginACB} variant='outlined' style={{color: '#ffffff', marginBottom: '40px', width: '100%', padding: '20px 0'}}>
                             {props.user ? 'Log out' : 'Log in'}
                         </Button>
                         <ButtonGroup orientation='vertical' aria-label='vertical contained button group' variant='contained' sx={{width: '100%', margin: 0, padding: 0}}>

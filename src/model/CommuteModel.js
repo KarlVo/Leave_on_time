@@ -3,9 +3,13 @@ import {searchStations, searchRoutes} from '/src/stationSource.js';
 
 export default {
 
-    // Uncomment the following line before deploying, and remove the prefilled mock-locations.
-    // Also change line 84: currentLocation: 2, => currentLocation: 1,
-    locations: [{id: 1,name: 'Default Location',routes: []}],
+    locations: [
+        {
+            id: 1,
+            name: 'Default Location',
+            routes: []
+        }
+    ],
     // locations: [
     //     {
     //         id: 1,
@@ -197,4 +201,5 @@ export default {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
         this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== id);
     }
+
 }
