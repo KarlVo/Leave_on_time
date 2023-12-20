@@ -79,7 +79,8 @@ export default function connectToFirebase(model) {
     function checkACB() {
         return ([
             model.locations,
-            model.currentLocation
+            model.currentLocation,
+            model.refresh
         ]);
     }
 
@@ -99,6 +100,7 @@ export default function connectToFirebase(model) {
         return ({
             currentLocationFB: model.currentLocation,
             locationsFB: model.locations,
+            refreshFB: model.refresh
         });
     }
 

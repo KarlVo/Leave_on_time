@@ -70,7 +70,7 @@ export default observer (
                 <Box className='sidebarCol'>
                     <Box className='top'>
                         <Typography variant='h1' component='h1' sx={{marginBottom: '40px', width: '300px', height: '100px'}}>
-                            <img src='/src/img/logo.png' alt='Leave on Time' width='300px' height='100px' />
+                            <img src='img/logo.png' alt='Leave on Time' width='300px' height='100px' />
                         </Typography>
                         <Button onClick={loginACB} variant='outlined' style={{color: '#ffffff', marginBottom: '40px', width: '100%', padding: '20px 0'}}>
                             {props.user ? 'Log out' : 'Log in'}
@@ -94,7 +94,7 @@ export default observer (
                 </Box>
 
                 <Dialog open={addLocationForm} onClose={addLocationFormClose} maxWidth='sm' fullWidth={true}>
-                    <DialogTitle>Creat New Location</DialogTitle>
+                    <DialogTitle>Create New Location</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
@@ -106,11 +106,18 @@ export default observer (
                             fullWidth
                             variant='standard'
                             onChange={locationNameUpdateACB}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault(); // Prevent the default behavior of the Enter key (e.g., form submission)
+                                  addLocationACB();
+                                }
+                              }}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={addLocationACB}>Save</Button>
                         <Button onClick={addLocationFormClose}>Cancel</Button>
+                        <Button onClick={addLocationACB}>Save</Button>
+                        
                     </DialogActions>
                 </Dialog>
             </Grid>

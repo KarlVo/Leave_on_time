@@ -94,7 +94,12 @@ export default observer (
                 return (
                     <Grid container spacing={'40px'} sx={{padding: '40px 0'}}>
                         <Grid xs={true}>
-                                <TextField onInput={searchStationsStringUpdateACB} fullWidth id="outlined-basic" label="Station or Bus Stop" variant="outlined" />
+                                <TextField onInput={searchStationsStringUpdateACB} fullWidth id="outlined-basic" label="Station or Bus Stop" variant="outlined"  onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault(); // Prevent the default behavior of the Enter key (e.g., form submission)
+                                  searchStationsSubmitACB();
+                                }
+                              }} />
                         </Grid>
                         <Grid xs={'auto'}>
                                 <Button onClick={searchStationsSubmitACB} variant='outlined' sx={{paddingTop:'15px', paddingBottom: '14px'}}>Search</Button>
@@ -110,7 +115,12 @@ export default observer (
                 return (
                     <Grid container spacing={'40px'} sx={{padding: '40px 0'}}>
                         <Grid xs={true}>
-                                <TextField onInput={searchStationsStringUpdateACB} fullWidth id="outlined-basic" label="Station or Bus Stop" variant="outlined" />
+                                <TextField onInput={searchStationsStringUpdateACB} fullWidth id="outlined-basic" label="Station or Bus Stop" variant="outlined"  onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault(); // Prevent the default behavior of the Enter key (e.g., form submission)
+                                  searchStationsSubmitACB();
+                                }
+                              }} />
                         </Grid>
                         <Grid xs={'auto'}>
                                 <Button onClick={searchStationsSubmitACB} variant='outlined' sx={{paddingTop:'15px', paddingBottom: '14px'}}>Search</Button>

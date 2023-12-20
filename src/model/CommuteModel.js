@@ -24,6 +24,8 @@ export default {
     currentLocation: 1,
     currentRoute: null,
 
+    refresh: true,
+
     getRoutesPromiseStates: {},
     getFromStationsPromiseState: {},
     getToStationsPromiseState: {},
@@ -48,6 +50,7 @@ export default {
     renameLocation(name) {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
         this.locations[idx].name = name;
+        this.refresh = !this.refresh;
     },
 
     addLocation(name) {
@@ -144,11 +147,12 @@ export default {
     deleteRoute(id) {
         const idx = this.locations.findIndex(location => location.id === this.currentLocation);
         this.locations[idx].routes = this.locations[idx].routes.filter(location => location.id !== id);
+        this.refresh = !this.refresh;
     },
 
     editRouteTime(newTime){
         this.getLocation().routes[this.currentRoute-1].stationDistance = newTime
-
+        this.refresh = !this.refresh;
     },
 
 }

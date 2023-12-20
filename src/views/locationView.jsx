@@ -130,11 +130,19 @@ export default observer (
                             onChange={newLocationNameACB}
                             fullWidth
                             variant='standard'
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault(); // Prevent the default behavior of the Enter key (e.g., form submission)
+                                renameLocationACB(); 
+                                }
+                              }}
+                           
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={renameLocationACB}>Save</Button>
-                        <Button onClick={renameLocationClose}>Cancel</Button>
+                    <Button onClick={renameLocationClose}>Cancel</Button>
+                        <Button onClick={renameLocationACB}  >Save</Button>
+                       
                     </DialogActions>
                 </Dialog>
 

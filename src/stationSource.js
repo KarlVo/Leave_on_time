@@ -2,7 +2,7 @@ import {STATIONS_URL, ROUTES_URL} from '/src/apiConfig.js';
 
 export function searchStations(searchString) {
     const url = STATIONS_URL + searchString;
-    return fetch(url).then(getJSONACB).then(keepResultArrayACB);
+    return fetch(url, {headers: {"X-DH2642-Key":"3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"}}).then(getJSONACB).then(keepResultArrayACB);
 }
 
 export function searchRoutes(originId, destId, timeOffset) {
@@ -13,7 +13,7 @@ export function searchRoutes(originId, destId, timeOffset) {
     const time = dateTime.toISOString().slice(11, 16);
 
     const url = ROUTES_URL + '&originId=' + originId + '&destId=' + destId + '&Date=' + date + '&Time=' + time + '&numF=' + '4' + '&numB=' + '0';
-    return fetch(url).then(getJSONACB);
+    return fetch(url, {headers: {"X-DH2642-Key":"3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767"}}).then(getJSONACB);
 }
 
 function getJSONACB(response) { 
