@@ -28,6 +28,10 @@ export default observer (
             props.model.setRoutesPromiseState(locationID, routeID);
         }
 
+        function focusSwitchACB(id) {
+            props.model.focusSwitch(id);
+        }
+
         return (
             <LocationView
                 location={props.model.getLocation()}
@@ -38,6 +42,7 @@ export default observer (
                 deleteRoute={deleteRouteACB}
                 setCurrentRoute={setCurrentRouteACB}
                 setRoutesPromiseState={setRoutesPromiseStateACB}
+                focusSwitch={focusSwitchACB}
                 getRoutesPromiseStates={props.model.getRoutesPromiseStates}
             />
         );

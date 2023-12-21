@@ -9,16 +9,16 @@ body {
     margin: 0;
 }
 
-@media(min-width: 550px){
+@media (min-width: 900px) {
     .sidebar {
         display: flex;
         min-height: calc(100vh - 80px);
         margin: 20px;
     }
-}
-.mainContent {
-    min-height: calc(100vh - 80px);
-    margin: 20px;
+    .mainContent {
+        min-height: calc(100vh - 80px);
+        margin: 20px;
+    }
 }
 
 .pageHead {

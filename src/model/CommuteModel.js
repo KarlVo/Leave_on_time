@@ -150,9 +150,16 @@ export default {
         this.refresh = !this.refresh;
     },
 
-    editRouteTime(newTime){
+    editRouteTime(newTime) {
         this.getLocation().routes[this.currentRoute-1].stationDistance = newTime
         this.refresh = !this.refresh;
     },
+
+    focusSwitch(id) {
+        const idx = this.locations.findIndex(location => location.id === this.currentLocation);
+        const idz = this.locations[idx].routes.findIndex(route => route.id === id);
+        this.locations[idx].routes[idz].focused = !this.locations[idx].routes[idz].focused;
+        this.refresh = !this.refresh;
+    }
 
 }

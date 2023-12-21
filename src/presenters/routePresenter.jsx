@@ -12,12 +12,17 @@ export default observer (
             props.setCurrentRoute(id);
         }
 
+        function focusSwitchACB(id) {
+            props.focusSwitch(id);
+        }
+
         return (
             <RouteView
                 route={props.route}
                 deleteRoute={deleteRouteACB}
                 setCurrentRoute={setCurrentRouteACB}
                 getRoutesPromiseState={props.getRoutesPromiseState}
+                focusSwitch={focusSwitchACB}
             />
         );
     }

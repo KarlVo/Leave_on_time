@@ -41,41 +41,16 @@ export default observer (
             window.location.hash='editroute';
         }
 
+        function focusSwitchACB(evt) {
+            props.focusSwitch(props.route.id);
+        }
+
         function deleteRouteACB(evt) {
             props.deleteRoute(props.route.id);
         }
 
-        function displayLinesCB(line) {
-            const info = line.LegList.Leg[0];
-            const distance = parseInt(props.route.stationDistance);
-
-            let plusMinus;
-            let timezoneOffset = new Date().getTimezoneOffset();
-            if (timezoneOffset < 0) {
-                timezoneOffset = Math.abs(timezoneOffset);
-                plusMinus = '+'
-            } else {
-                plusMinus = '-'
-            }
-
-            let hours = String((timezoneOffset - (timezoneOffset % 60))/60);
-            let minutes = String(timezoneOffset % 60);
-
-            if (hours.length === 1) {
-                hours = '0' + hours;
-            }
-            if (minutes.length === 1) {
-                minutes = '0' + minutes;
-            }
-
-            const Z = plusMinus + hours + ':' + minutes;
-
-            let timestamp = parseInt(Date.parse(info.Origin.date + 'T' + info.Origin.time + '.000' + Z));
-
-            let timeToLeave = String((Math.floor(((timestamp - Date.now())/1000)/60 - distance)) - parseInt(minutesPassed));
-
+        function getTransportData(info) {
             let color = 'default';
-
             let transitSymbol;
             if (info.Product?.line) {
                 if (info.Product.catIn === 'BUS') {
@@ -112,12 +87,87 @@ export default observer (
                 info.Product.line = '---';
             }
 
+            return {
+                symbol: transitSymbol,
+                color: color,
+                line: info.Product.line
+            };
+        }
+
+        function getTimeToLeave(date, time) {
+            const distance = parseInt(props.route.stationDistance);
+
+            let plusMinus;
+            let timezoneOffset = new Date().getTimezoneOffset();
+            if (timezoneOffset < 0) {
+                timezoneOffset = Math.abs(timezoneOffset);
+                plusMinus = '+'
+            } else {
+                plusMinus = '-'
+            }
+
+            let hours = String((timezoneOffset - (timezoneOffset % 60))/60);
+            let minutes = String(timezoneOffset % 60);
+
+            if (hours.length === 1) {
+                hours = '0' + hours;
+            }
+            if (minutes.length === 1) {
+                minutes = '0' + minutes;
+            }
+
+            const Z = plusMinus + hours + ':' + minutes;
+
+            let timestamp = parseInt(Date.parse(date + 'T' + time + '.000' + Z));
+
+            return (String((Math.floor(((timestamp - Date.now())/1000)/60 - distance)) - parseInt(minutesPassed)));
+        }
+
+        function displayLinesCB(line) {
+            const info = line.LegList.Leg[0];
+            const transportInfo = getTransportData(info);
+            let timeToLeave = getTimeToLeave(info.Origin.date, info.Origin.time);
+
             return (
                 <Grid container spacing={1} key={info.number} className={parseInt(timeToLeave) < 0 ? 'passed' : 'notPassed'}>
-                    <Grid xs={1}>{transitSymbol}</Grid>
-                    <Grid xs={2}><Chip color={color} className='lineChip' size='small' variant='filled' label={info.Product.line} /></Grid>
-                    <Grid xs={6}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
-                    <Grid xs={3}><Typography variant='body2' component='span'>{parseInt(timeToLeave) < 0 ? '0' : timeToLeave} min</Typography></Grid>
+                    <Grid xs={'auto'}>{transportInfo.symbol}</Grid>
+                    <Grid xs={'auto'}><Chip color={transportInfo.color} className='lineChip' size='small' variant='filled' label={transportInfo.line} /></Grid>
+                    <Grid xs={true}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
+                    <Grid xs={'auto'}><Typography variant='body2' component='span'>{parseInt(timeToLeave) < 0 ? '0' : timeToLeave} min</Typography></Grid>
+                </Grid>
+            );
+        }
+
+        function displayFocusedLineCB(line) {
+            const info = line.LegList.Leg[0];
+            const transportInfo = getTransportData(info);
+            let timeToLeave = getTimeToLeave(info.Origin.date, info.Origin.time);
+
+            return (
+                <Grid container spacing={1} key={info.number} className={parseInt(timeToLeave) < 0 ? 'passedFocus' : 'notPassedFocus'}>
+                    <Grid xs={true}></Grid>
+                    <Grid xs={'auto'}>{transportInfo.symbol}</Grid>
+                    <Grid xs={'auto'}><Chip color={transportInfo.color} className='lineChip' size='small' variant='filled' label={transportInfo.line} /></Grid>
+                    <Grid xs={'auto'}><Typography variant='body2' component='span'>{info.direction}</Typography></Grid>
+                    <Grid xs={true}></Grid>
+                    <Grid xs={12} sx={{textAlign: 'center'}}><Typography variant='h1' component='span'>{parseInt(timeToLeave) < 0 ? 'Leave!' : timeToLeave + ' min'}</Typography></Grid>
+                </Grid>
+            );
+        }
+
+        function renderFocusedPlaceHolder() {
+            const iconDim = 25;
+            const fontSize = '1.3rem';
+            const fontSizeBig = '6.25rem';
+
+            return (
+                <Grid container spacing={1}>
+                    <Grid xs={2}></Grid>
+                    <Grid xs={'auto'}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
+                    <Grid xs={'auto'}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
+                    <Grid xs={true}><Skeleton variant="text" sx={{ fontSize: fontSize }} /></Grid>
+                    <Grid xs={2}></Grid>
+                    <Grid xs={12} sx={{textAlign: 'center'}}><Skeleton variant="text" sx={{ fontSize: fontSizeBig }} /></Grid>
                 </Grid>
             );
         }
@@ -125,6 +175,7 @@ export default observer (
         function renderPlaceHolder() {
             const iconDim = 25;
             const fontSize = '1.3rem';
+
             return (
                 <Grid container spacing={1}>
                     <Grid xs={1}><Skeleton variant="circular" width={iconDim} height={iconDim} /></Grid>
@@ -160,7 +211,7 @@ export default observer (
                     <Divider />
 
                     <Box className='block'>
-                        {props.getRoutesPromiseState.data ? props.getRoutesPromiseState.data.Trip.slice(0, 4).map(displayLinesCB) : renderPlaceHolder()}
+                        {props.getRoutesPromiseState.data ? (props.route.focused ? props.getRoutesPromiseState.data.Trip.slice(0, 1).map(displayFocusedLineCB) : props.getRoutesPromiseState.data.Trip.slice(0, 4).map(displayLinesCB)) : (props.route.focused ? renderFocusedPlaceHolder() : renderPlaceHolder())}
                     </Box>
 
                     <Divider />
@@ -169,7 +220,7 @@ export default observer (
                         <Grid container>
                             <Grid xs={true}>
                                 <FormGroup>
-                                    <FormControlLabel size='small' control={<Switch defaultChecked={props.route.focused} />} label='Focus' />
+                                    <FormControlLabel size='small' control={<Switch onClick={focusSwitchACB} checked={props.route.focused} />} label='Focus' />
                                 </FormGroup>
                             </Grid>
                             <Grid xs={'auto'}>

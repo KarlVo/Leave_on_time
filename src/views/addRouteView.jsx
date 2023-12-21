@@ -257,7 +257,7 @@ export default observer (
         }
 
         return (
-            <Grid xs={true}>
+            <Grid xs={12} md={true}>
                 <Paper elevation={3} className='mainContent'>
                     <Grid container>
                         <Grid xs={true}>

@@ -63,6 +63,10 @@ export default observer (
             removeLocationClose();
         }
 
+        function focusSwitchACB(id) {
+            props.focusSwitch(id);
+        }
+
         function addRouteACB(evt) {
             window.location.hash='addroute';
         }
@@ -80,12 +84,12 @@ export default observer (
             props.getRoutes(route.fromID, route.toID, route.stationDistance, props.getRoutesPromiseStates[props.location.id][route.id]);
             
             return (
-                <Route key={route.id} route={route} locationId={props.location.id} deleteRoute={deleteRouteACB} setCurrentRoute={setCurrentRouteACB} getRoutesPromiseState={props.getRoutesPromiseStates[props.location.id][route.id]} />
+                <Route key={route.id} route={route} locationId={props.location.id} deleteRoute={deleteRouteACB} focusSwitch={focusSwitchACB} setCurrentRoute={setCurrentRouteACB} getRoutesPromiseState={props.getRoutesPromiseStates[props.location.id][route.id]} />
             );
         }
 
         return (
-            <Grid xs={true}>
+            <Grid xs={12} md={true}>
                 <Paper elevation={3} className='mainContent'>
                     <Grid container>
                         <Grid xs={true}>

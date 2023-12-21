@@ -65,8 +65,8 @@ export default observer (
         }
 
         return (
-            <Grid xs={'auto'} className='sidebar'>
-                <Box className='sidebarCol'>
+            <Grid xs={12} md={'auto'} className='sidebar'>
+                <Box className='sidebarCol' width={'300px'}>
                     <Box className='top'>
                         <Typography variant='h1' component='h1' sx={{marginBottom: '40px', width: '300px', height: '100px'}}>
                             <img src='img/logo.png' alt='Leave on Time' width='300px' height='100px' />
