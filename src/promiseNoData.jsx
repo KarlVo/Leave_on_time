@@ -8,7 +8,7 @@ export default function promiseNoData(promise, data, error) {
     }
 
     if (data === undefined) {
-        return (<div className="progress"></div>);
+        return (<div className='progress'></div>);
     }
 
     return false;

@@ -1,5 +1,4 @@
 import {observer} from 'mobx-react-lite';
-import {getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut} from 'firebase/auth';
 
 import React from 'react';
 
@@ -108,16 +107,15 @@ export default observer (
                             onChange={locationNameUpdateACB}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
-                                  e.preventDefault(); // Prevent the default behavior of the Enter key (e.g., form submission)
-                                  addLocationACB();
+                                    e.preventDefault();
+                                    addLocationACB();
                                 }
-                              }}
+                            }}
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={addLocationFormClose}>Cancel</Button>
                         <Button onClick={addLocationACB}>Save</Button>
-                        
                     </DialogActions>
                 </Dialog>
             </Grid>

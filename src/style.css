@@ -10,11 +10,11 @@ body {
 }
 
 @media(min-width: 550px){
-.sidebar {
-    display: flex;
-    min-height: calc(100vh - 80px);
-    margin: 20px;
-}
+    .sidebar {
+        display: flex;
+        min-height: calc(100vh - 80px);
+        margin: 20px;
+    }
 }
 .mainContent {
     min-height: calc(100vh - 80px);

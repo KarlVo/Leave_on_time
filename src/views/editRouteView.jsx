@@ -11,8 +11,6 @@ import Paper from '@mui/material/Paper';
 import PlaceIcon from '@mui/icons-material/Place';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
-import InputLabel from '@mui/material/InputLabel';
-import MuiInput from '@mui/material/Input';
 import Input from '@mui/material/Input';
 
 export default observer (
@@ -22,25 +20,23 @@ export default observer (
         }
         
         const [value, setValue ] = React.useState(props.location.routes[props.currentRoute].stationDistance);
-        const handleSliderChange = (event, newValue) => { // slider code from https://mui.com/material-ui/react-slider/
+        const handleSliderChange = (event, newValue) => {
             setValue(newValue);
             props.textMin(event.target.value);
-            
-          };
+        };
 
         const handleInputChange = (event) => {
-           
             setValue(event.target.value === '' ? 0 : Number(event.target.value));
             props.textMin(event.target.value);
-          };
+        };
 
         const handleBlur = () => {
             if (value < 0) {
-              setValue(0);
+                setValue(0);
             } else if (value > 100) {
-              setValue(100);
+                setValue(100);
             }
-          };
+        };
 
         return (
             <Grid xs={true}>
@@ -58,24 +54,24 @@ export default observer (
                     </Grid>
                     <Divider />
                     <Grid container spacing={'40px'} sx={{padding: '40px'}}>
-                    <Box flexDirection='column' marginBottom={2}>
-                        <Box sx={{ width: 700 }}>
+                        <Box flexDirection='column' marginBottom={2}>
+                            <Box sx={{ width: 700 }}>
                                 <Typography id="input-slider" gutterBottom>Time to Station</Typography>
                                 <Grid container spacing={2} alignItems="center">
-                                <Grid item>
-                                <DirectionsRunIcon />
-                                </Grid>
-                                <Grid item xs>
-                                <Slider value={typeof value === 'number' ? value : 0} onChange={handleSliderChange} aria-labelledby="input-slider" min={0} max={20}/>
-                                </Grid>
-                                <Grid item>
-                                    <Input value={value} size="small" onChange={handleInputChange} onBlur={handleBlur} inputProps={{ step: 1, min: 0, max: 30, type: 'number', 'aria-labelledby': 'input-slider', }} />
-                                    <span style={{ marginLeft: '4px' }}>min</span>
-                                </Grid>
+                                    <Grid item>
+                                        <DirectionsRunIcon />
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Slider value={typeof value === 'number' ? value : 0} onChange={handleSliderChange} aria-labelledby="input-slider" min={0} max={20}/>
+                                    </Grid>
+                                    <Grid item>
+                                        <Input value={value} size="small" onChange={handleInputChange} onBlur={handleBlur} inputProps={{ step: 1, min: 0, max: 30, type: 'number', 'aria-labelledby': 'input-slider', }} />
+                                        <span style={{ marginLeft: '4px' }}>min</span>
+                                    </Grid>
                                 </Grid>
                             </Box>
-                            </Box>                    
-                            </Grid>
+                        </Box>                    
+                    </Grid>
                 </Paper>
             </Grid>
         );
